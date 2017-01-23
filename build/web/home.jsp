@@ -8,9 +8,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+        <meta http-equiv="Content-Type" content="text/html charset=UTF-8"/>
+
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.css"/>
         <style type="text/css">
+            body {
+                background-image: url("man_meteor.jpg");
+                background-repeat: no-repeat;  
+                background-size: cover;
+                background-attachment: fixed;
+                background-position: center;
+            }
             .container{
                 width: 260px;
                 height: 150px;

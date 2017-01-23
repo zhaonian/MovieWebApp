@@ -19,8 +19,8 @@ public class Search {
 		this.dbConnection = dbConnection;
 	}
 
-	public int getSearchResult(String title, int yearFrom, int yearTo, String director, String star) {
-		
-		
-	}
+//	public int getSearchResult(String title, int yearFrom, int yearTo, String director, String star) {
+//		
+//		
+//	}
 }
