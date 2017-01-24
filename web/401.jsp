@@ -9,9 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
         <title>401 Error Page</title>
     </head>
     <body>
-        <h1>401 Error: Authentication Failed</h1>
+        <h1>
+            <i style="color:red;" class="fa fa-times" aria-hidden="true"></i>
+            <div style="margin-left: 10px;
+                 display: inline-block;">401 Error: Authentication Failed</div>
+        </h1>
     </body>
 </html>

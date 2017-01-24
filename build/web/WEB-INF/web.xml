@@ -14,7 +14,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern></url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>

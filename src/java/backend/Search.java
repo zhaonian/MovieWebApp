@@ -6,6 +6,12 @@
 package backend;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,8 +25,49 @@ public class Search {
 		this.dbConnection = dbConnection;
 	}
 
-//	public int getSearchResult(String title, int yearFrom, int yearTo, String director, String star) {
-//		
-//		
+//	public ArrayList<Integer> getMovieByTitle(String titlePattern) {
+//		ArrayList<Integer> arrayID = new ArrayList<>();
+//		try {
+//			String select = "SELECT * FROM movies "
+//				+ "WHERE title LIKE ?;";
+//
+//			PreparedStatement preparedStatement;
+//			preparedStatement = dbConnection.prepareStatement(select);
+//			preparedStatement.setString(1, titlePattern);
+//			ResultSet result = preparedStatement.executeQuery();
+//
+//			if (result.next()) {
+//				arrayID.add(result.getInt("id"));
+//			}
+//		} catch (SQLException ex) {
+//			Logger.getLogger(UserVerification.class.getName()).log(Level.SEVERE, null, ex);
+//		}
+//		System.out.println(arrayID.toString());
+//		return arrayID;
+//	}
+	public ResultSet getMovieByTitle(String titlePattern) {
+		ArrayList<Integer> arrayID = new ArrayList<>();
+		ResultSet result = null;
+		try {
+			String select = "SELECT * FROM movies "
+				+ "WHERE title LIKE ?;";
+
+			PreparedStatement preparedStatement;
+			preparedStatement = dbConnection.prepareStatement(select);
+			preparedStatement.setString(1, "%" + titlePattern + "%");
+			result = preparedStatement.executeQuery();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(UserVerification.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return result;
+
+	}
+//	public ArrayList<Integer> getMovieByYear(int yearFrom, int yearTo) {
+//		ArrayList<Integer> arrayID = new ArrayList<>();
+//		for (int i = yearFrom; i < yearTo; i++) {
+//			arrayID.add(i);
+//		}
+//		return arrayID;
 //	}
 }

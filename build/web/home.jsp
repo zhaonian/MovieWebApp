@@ -9,59 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html charset=UTF-8"/>
-
-        <link rel="stylesheet" type="text/css" href="css/font-awesome.css"/>
-        <style type="text/css">
-            body {
-                background-image: url("man_meteor.jpg");
-                background-repeat: no-repeat;  
-                background-size: cover;
-                background-attachment: fixed;
-                background-position: center;
-            }
-            .container{
-                width: 260px;
-                height: 150px;
-                text-align: center;
-                background-color: rgba(52, 73, 94, 0.7);
-                margin: 0 auto;
-                margin-top: 1%;
-                color: #9B59B6;
-            }
-            input{
-                height: 20px;
-                width: 140px;
-                font-size: 12px;
-                margin-top: 7%;
-                background-color: #fff;
-                padding-left: 4%;
-            }
-            .form-input::before{
-                content: "\f2c0";
-                position: absolute;
-                font-family: "FontAwesome";
-                font-size: 15px;
-                padding-top: 1.9%;
-                padding-left: 0.3%;
-            }
-            .form-input:nth-child(2)::before{
-                content: "\f023";
-                padding-left: 0.4%;
-            }
-            .btn-login{
-                width: 100px; 
-                padding-left: 10%;
-                padding-right: 10%;
-                border: none;
-                border-radius: 4px;
-                color: #fff;
-                background-color: #2ECC71;
-                cursor: pointer;
-            }
-        </style>
+        <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
+        <link href="css/meteor.css" rel="stylesheet" type="text/css" />
     </head>
-    <body bgcolor='#fddbff'>
-        <h1 align="center">Welcome To Luan's MovieWebApp!</h1>
+
+    <body>
+        <h1 align="center"><i class="fa fa-film" aria-hidden="true"></i>  Welcome to Zhaonian Luan's MovieWebApp!</h1>
         <div class="container">
             <form action=<%=request.getContextPath() + "/Login"%> method="POST">
                 <div class="form-input">
