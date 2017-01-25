@@ -11,6 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
         <link href="css/meteor.css" rel="stylesheet" type="text/css" />
         <title>Movie List</title>
     </head>
@@ -26,6 +27,7 @@
                 <th>title</th>
                 <th>year</th>
                 <th>director</th>
+                <th>add into shopping cart</th>
             </tr>
             <%
                     ResultSet result = (ResultSet) request.getAttribute("result");
@@ -50,6 +52,19 @@
                 <td>
                     <%
                             out.print("<div>" + result.getString("director") + "</div>");
+                    %>
+                </td>
+                <td>
+                    <%
+                            out.print("<form action=/MovieWebApp/SingleMovie>"
+                                    + "<div style='padding-left: 35%;'>"
+                                    + "<button value=" + result.getInt("id")
+                                    + " name='itemAddedToCart'>"
+                                    + "<i class='fa fa-shopping-cart' aria-hidden='true'></i>"
+                                    + "&nbsp;add"
+                                    + "</button>"
+                                    + "</div>"
+                                    + "</form>");
                     %>
                 </td>
             </tr>

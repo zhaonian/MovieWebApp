@@ -13,7 +13,7 @@
         <title>Search Page</title>
     </head>
     <body style="background-image: url(sky.png); 
-          padding-left: 30%;
+          padding-left: 3%;
           background-repeat: no-repeat;
           background-size: cover;
           background-attachment: fixed;
@@ -42,7 +42,11 @@
             </div>
             <br>
             <br>
-            <input style="background-color: #2ECC71; border-radius: 6px; width: 100px; height: 40px;" type="submit" value="Search">
+            <button style="background-color: #2ECC71; 
+                    border-radius: 6px; 
+                    width: 100px; height: 40px;">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+            </button>
         </form>    
     </body>
 </html>
