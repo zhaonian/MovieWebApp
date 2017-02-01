@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
+        <link href=<%=request.getContextPath()+"/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Search Page</title>
     </head>

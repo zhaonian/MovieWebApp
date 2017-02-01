@@ -38,7 +38,7 @@ public class Login extends HttpServlet {
 		
 		if (userVerification.verifyUser(email, passwd)) {
 			request.getRequestDispatcher("mainPage.jsp").forward(request, response);
-			request.getSession().setAttribute("logInFlag", true);
+			request.getSession().setAttribute("user_email", email);
 		}
 		else {
 			request.getRequestDispatcher("401.jsp").forward(request, response);

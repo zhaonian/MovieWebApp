@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
+        <link href=<%=request.getContextPath()+"/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
         <title>401 Error Page</title>
     </head>
     <body>

@@ -5,6 +5,8 @@
  */
 package servlet;
 
+import backend.DBConnection;
+import backend.Sortation;
 import java.io.IOException;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-public class Search extends HttpServlet {
+public class SortMovie extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and
@@ -29,28 +31,15 @@ public class Search extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-
-		String titlePattern = request.getParameter("title");
-		String yearFrom = request.getParameter("yearFrom");
-		String yearTo = request.getParameter("yearTo");
-		String director = request.getParameter("director");
-		String star = request.getParameter("star");
-
-//		System.out.println("title: " + titlePattern);
-//		System.out.println(yearFrom + " to " + yearTo);
-//		System.out.println("director: " + director);
-//		System.out.println("star: " + star);
-
-		backend.DBConnection dbConnection = new backend.DBConnection();
-		backend.Search search = new backend.Search(dbConnection.get_connection());
-		ResultSet result = search.getMovieByTitle(titlePattern);
-
+		String sortByWhat = request.getParameter("method");
+		backend.DBConnection dbConnection = new DBConnection();
+		backend.Sortation sortMovie = new Sortation(dbConnection.get_connection());
+		ResultSet result = sortMovie.sortMovies(sortByWhat);
 		request.setAttribute("result", result);
 		request.getRequestDispatcher("movieList.jsp").forward(request, response);
 	}
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *

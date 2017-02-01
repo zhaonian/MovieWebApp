@@ -6,9 +6,8 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-@WebServlet(name = "SingleMovie", urlPatterns = {"/SingleMovie"})
 public class SingleMovie extends HttpServlet {
 
 	/**
@@ -31,8 +29,13 @@ public class SingleMovie extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		String item = request.getParameter("itemAddedToCart");
-		
+		backend.DBConnection dbConnection = new backend.DBConnection();
+		backend.SingleMovie singleMovie = new backend.SingleMovie(dbConnection.get_connection());
+		int movieID = Integer.parseInt(request.getParameter("id"));
+		ResultSet result = singleMovie.getSingleMovie(movieID);
+		System.out.println("result---" + result);
+		request.setAttribute("result", result);
+		request.getRequestDispatcher("singleMovie.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -13,7 +13,15 @@
         <servlet-class>servlet.Search</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>singleMovie</servlet-name>
+        <servlet-name>ShoppingCart</servlet-name>
+        <servlet-class>servlet.ShoppingCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sortMovie</servlet-name>
+        <servlet-class>servlet.SortMovie</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SingleMovie</servlet-name>
         <servlet-class>servlet.SingleMovie</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -29,8 +37,16 @@
         <url-pattern>/Search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>singleMovie</servlet-name>
-        <url-pattern>/singleMovie</url-pattern>
+        <servlet-name>ShoppingCart</servlet-name>
+        <url-pattern>/ShoppingCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sortMovie</servlet-name>
+        <url-pattern>/sortMovie</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SingleMovie</servlet-name>
+        <url-pattern>/SingleMovie</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
