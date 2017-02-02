@@ -62,7 +62,9 @@
                 </td>
                 <td>
                     <%
-                            out.print("<form action=" + request.getContextPath() + "/ShoppingCart method='POST'>"
+                            out.print("<form action=" + request.getContextPath() 
+                                    + "/shoppingCart.jsp" 
+                                    +  " method='POST'>"
                                     + "<div style='padding-left: 35%;'>"
                                     + "<button value=" + result.getInt("id")
                                     + " name='movieAddedToCart'>"
@@ -71,6 +73,8 @@
                                     + "</button>"
                                     + "</div>"
                                     + "</form>");
+//                            out.print("<a href='" + request.getContextPath() + "/shoppingCart.jsp?id=" + result.getInt("id") + ">"
+//                                    + result.getInt("id") + "</a>");
                     %>
                 </td>
             </tr>

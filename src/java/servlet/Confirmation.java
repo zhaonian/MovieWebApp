@@ -6,8 +6,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-//@WebServlet(name = "ShoppingCart", urlPatterns = {"/ShoppingCart"})
-public class ShoppingCart extends HttpServlet {
+public class Confirmation extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and
@@ -30,19 +29,8 @@ public class ShoppingCart extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		String movieIDstr = request.getParameter("movieAddedToCart");
-//		request.getSession().setAttribute("movieAddedToCart", movie);
+		response.setContentType("text/html;charset=UTF-8");
 
-		backend.DBConnection dbConnection = new backend.DBConnection();
-		backend.CartInsertion cartInsertion = new backend.CartInsertion(dbConnection.get_connection());
-
-		String userEmail = (String) request.getSession().getAttribute("user_email");
-		int movieID = Integer.parseInt(movieIDstr);
-		System.out.println(movieIDstr);
-		System.out.println(userEmail);
-		cartInsertion.insertMovieIntoCart(userEmail, movieID, 0);  // need to implement num_copy
-
-//		request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

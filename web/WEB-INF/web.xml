@@ -44,6 +44,10 @@
         <servlet-name>MoviesByTitle</servlet-name>
         <servlet-class>servlet.MoviesByTitle</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Confirmation</servlet-name>
+        <servlet-class>servlet.Confirmation</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>MoviesByTitle</servlet-name>
         <url-pattern>/MoviesByTitle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Confirmation</servlet-name>
+        <url-pattern>/Confirmation</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
