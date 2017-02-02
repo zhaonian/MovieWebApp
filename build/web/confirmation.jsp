@@ -12,6 +12,21 @@
         <title>Confirmation</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Confirmation</h1>
+        <%
+                if ((boolean) request.getAttribute("confirmed")) {
+        %>
+        <h2>
+            Transaction succeeds! Thank You!
+        </h2>
+        <%
+        } else {
+        %>
+        <h2>
+            Wrong credit card info. Please try again.
+        </h2>
+        <%
+                }
+        %>
     </body>
 </html>

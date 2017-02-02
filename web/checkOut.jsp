@@ -28,7 +28,7 @@
                     <input type="text" name="creditCard" placeholder="Credit Card #">
                 </div>
                 <div>
-                    <input type="text" name="expDate" placeholder="Expiration Date (yyyy-mm-dd)">
+                    <input type="Date" name="expDate">
                 </div>
                 <input type="submit" value="Check Out" class="btn-login">
             </form>

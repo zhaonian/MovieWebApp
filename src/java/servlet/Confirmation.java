@@ -6,7 +6,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +29,21 @@ public class Confirmation extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-
+		
+		backend.DBConnection dbConnection = new backend.DBConnection();
+		backend.Confirmation confirmation = new backend.Confirmation(dbConnection.get_connection());
+		
+		String firstname = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String cardNumber = request.getParameter("creditCard");
+		String expDate = request.getParameter("expDate");
+		
+		boolean confirmed = confirmation.verifyCreditCard(firstname, lastName, cardNumber, expDate);
+		request.setAttribute("confirmed", confirmed);
+		request.getRequestDispatcher("confirmation.jsp").forward(request, response);
+		
+		
+		
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
