@@ -19,6 +19,6 @@
           background-position: center;">
         <h1>Main Page</h1>
         <a href=<%=request.getContextPath() + "/search.jsp"%>>Search</a>
-        <a href=<%=request.getContextPath() + "/browse.jsp"%>>Browse</a>
+        <a href=<%=request.getContextPath() + "/Browse"%>>Browse</a>
     </body>
 </html>

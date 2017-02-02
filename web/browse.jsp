@@ -4,6 +4,7 @@
     Author     : Luan
 --%>
 
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,22 @@
           background-size: cover;
           background-attachment: fixed;">
         <h1>Browse by Genre</h1>
-        
+            <%
+                    ResultSet result = (ResultSet) request.getAttribute("allGenres");
+                    while (result.next()) {
+                            out.print("<a href='" + request.getContextPath() + "/MoviesByGenre?genre="
+                                    + result.getString("name") + "'>" + result.getString("name") + "</a>&nbsp;&nbsp;");
+                    }
+            %>
+        <h1>Browse by Title</h1>
+        <%
+                for (int i = 0; i < 10; i++) {
+                        out.print("<a href= '" + request.getContextPath() + "/MoviesByTitle?title=" + i + "'>" 
+                                + i + "</a>&nbsp;&nbsp;");
+                }
+                for (char c = 'a'; c <= 'z'; c++) {
+                        out.print("<a href= '" + request.getContextPath() + "/MoviesByTitle?title=" + c + "'>" 
+                                + c + "</a>&nbsp;&nbsp;");                }
+        %>
     </body>
 </html>

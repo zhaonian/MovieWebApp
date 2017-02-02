@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>JspFilter</filter-name>
+        <filter-class>servlet.JspFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>JspFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>Index</servlet-name>
         <servlet-class>servlet.Index</servlet-class>
@@ -24,6 +32,18 @@
         <servlet-name>SingleMovie</servlet-name>
         <servlet-class>servlet.SingleMovie</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Browse</servlet-name>
+        <servlet-class>servlet.Browse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MoviesByGenre</servlet-name>
+        <servlet-class>servlet.MoviesByGenre</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MoviesByTitle</servlet-name>
+        <servlet-class>servlet.MoviesByTitle</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -47,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>SingleMovie</servlet-name>
         <url-pattern>/SingleMovie</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Browse</servlet-name>
+        <url-pattern>/Browse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MoviesByGenre</servlet-name>
+        <url-pattern>/MoviesByGenre</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MoviesByTitle</servlet-name>
+        <url-pattern>/MoviesByTitle</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
