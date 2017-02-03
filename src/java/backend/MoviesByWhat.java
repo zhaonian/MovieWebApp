@@ -27,7 +27,8 @@ public class MoviesByWhat {
 	public ResultSet getMoviesByGenre(String genre) {
 		ResultSet result = null;
 		try {
-			String select = "SELECT * FROM movies WHERE genre = ?";
+			String select = "SELECT * FROM movies NATURAL JOIN genres "
+				+ "WHERE genres.name = ?";
 			PreparedStatement preparedStatement;
 			preparedStatement = dbConnection.prepareStatement(select);
 			preparedStatement.setString(1, genre);
@@ -44,9 +45,7 @@ public class MoviesByWhat {
 			String select = "SELECT * FROM movies WHERE title LIKE ?;";
 			PreparedStatement preparedStatement;
 			preparedStatement = dbConnection.prepareStatement(select);
-			System.out.println("aaaaaaaaa---");
 			preparedStatement.setString(1, c + "%");
-			System.out.println(select + "---" + preparedStatement);
 			result = preparedStatement.executeQuery();
 		} catch (SQLException ex) {
 			Logger.getLogger(MoviesByWhat.class.getName()).log(Level.SEVERE, null, ex);

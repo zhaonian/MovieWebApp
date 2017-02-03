@@ -27,7 +27,8 @@ public class SingleMovie {
 	public ResultSet getSingleMovie(int movieID) {
 		ResultSet result = null;
 		try {
-			String select = "SELECT * FROM movies WHERE id = ?;";
+			String select = "SELECT * FROM movies NATURAL JOIN stars NATURAL JOIN genres "
+				+ "WHERE movies.id = ?;";
 
 			PreparedStatement preparedStatement;
 			preparedStatement = dbConnection.prepareStatement(select);

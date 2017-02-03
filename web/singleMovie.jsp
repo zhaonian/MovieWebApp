@@ -15,7 +15,7 @@
         <title>Movie Info</title>
     </head>
     <body>
-        <div class='container'>
+        <div>
             <%
                     ResultSet result = (ResultSet) request.getAttribute("result");
                     while (result.next()) {
@@ -23,10 +23,11 @@
                             out.print("<div> Year: " + result.getInt("year") + "</div>");
                             out.print("<div> ID: " + result.getInt("id") + "</div>");
                             out.print("<div> Director: " + result.getString("director") + "</div>");
-                            //                        out.print("<div> Stars " + result.getString("stars") + "</div>");
-                            out.print("<a href='" + result.getString("trailer_url") + "'> "
-                                    + "<i class='fa fa-play-circle-o'></i>Watch Trailor</a>");
-                            //                        out.print("<img src=url(" + result.getString("banner_url") + ")/>");
+                            out.print("<div> Stars: " + result.getString("stars.first_name")
+                                    + " " + result.getString("stars.last_name") + "</div>");
+                            out.print("<div> Genres: " + result.getString("genres.name") + "</div>");
+                            out.print("<div> Trailer: " + result.getString("trailer_url") + "</div>");
+                            out.print("<img src='" + result.getString("banner_url") + "'/>");
                     }
             %>
         </div>

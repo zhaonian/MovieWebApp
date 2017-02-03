@@ -10,11 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href=<%=request.getContextPath() + "/css/meteor.css"%> rel="stylesheet" type="text/css" />
         <title>Shopping Cart</title>
     </head>
-    <body>
+    <body class=''>
         <h1>Shopping Cart</h1>
-        <table border="1">
+        <table border="4">
             <tr>
                 <th>Title</th>
                 <th>Price</th>
@@ -52,6 +53,12 @@
                     }
             %>
         </table>
-        <a href="<%=request.getContextPath()+"/checkOut.jsp"%>">Check Out</a>
+        <h3>
+            Total: $
+            <%
+                    out.print(request.getParameter("quantity"));
+            %>
+        </h3>
+        <a href="<%=request.getContextPath() + "/checkOut.jsp"%>">Check Out</a>
     </body>
 </html>

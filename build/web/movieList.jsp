@@ -11,8 +11,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href=<%=request.getContextPath()+"/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
-        <link href=<%=request.getContextPath()+"/css/meteor.css"%> rel="stylesheet" type="text/css" />
+        <link href=<%=request.getContextPath() + "/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
+        <link href=<%=request.getContextPath() + "/css/meteor.css"%> rel="stylesheet" type="text/css" />
         <title>Movie List</title>
     </head>
     <body style="background-image: url(sky.png);    
@@ -25,10 +25,10 @@
             <tr>
                 <th>id</th>
                 <th>
-                    <a href="<%=request.getContextPath()+"/sortMovie?method=title"%>">title</a>
+                    <a href="<%=request.getContextPath() + "/sortMovie?method=title"%>">title</a>
                 </th>
                 <th>
-                    <a href="<%=request.getContextPath()+"/sortMovie?method=year"%>">year</a>
+                    <a href="<%=request.getContextPath() + "/sortMovie?method=year"%>">year</a>
                 </th>
                 <th>director</th>
                 <th>add into shopping cart</th>
@@ -44,10 +44,10 @@
                     %>
                 </td>
                 <td>
-                    <a href="<%=request.getContextPath()+"/SingleMovie?id="+result.getInt("id")%>">
-                    <%
-                            out.print("<div>" + result.getString("title") + "</div>");
-                    %>
+                    <a href="<%=request.getContextPath() + "/SingleMovie?id=" + result.getInt("id")%>">
+                        <%
+                                out.print("<div>" + result.getString("title") + "</div>");
+                        %>
                     </a>
                 </td>
                 <td>
@@ -62,9 +62,9 @@
                 </td>
                 <td>
                     <%
-                            out.print("<form action=" + request.getContextPath() 
-                                    + "/shoppingCart.jsp" 
-                                    +  " method='POST'>"
+                            out.print("<form action=" + request.getContextPath()
+                                    + "/shoppingCart.jsp"
+                                    + " method='POST'>"
                                     + "<div style='padding-left: 35%;'>"
                                     + "<button value=" + result.getInt("id")
                                     + " name='movieAddedToCart'>"

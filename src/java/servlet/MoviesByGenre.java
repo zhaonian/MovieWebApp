@@ -6,7 +6,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +31,12 @@ public class MoviesByGenre extends HttpServlet {
 		throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		
+		backend.DBConnection dbConnection = new backend.DBConnection();
+		backend.MoviesByWhat moviesByWhat = new backend.MoviesByWhat(dbConnection.get_connection());
+		
+		ResultSet result = moviesByWhat.getMoviesByGenre(request.getParameter("genre"));
+		request.setAttribute("result", result);
+		request.getRequestDispatcher("movieList.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
