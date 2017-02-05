@@ -15,6 +15,7 @@
 
     <body>
         <h1 align="center"><i class="fa fa-film" aria-hidden="true"></i>  Welcome to Zhaonian Luan's MovieWebApp!</h1>
+
         <div class="container">
             <form action=<%=request.getContextPath() + "/Login"%> method="POST">
                 <div class="form-input">

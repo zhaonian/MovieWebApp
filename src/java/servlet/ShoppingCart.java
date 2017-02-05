@@ -6,6 +6,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,19 +31,29 @@ public class ShoppingCart extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
+
+		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
+			request.getRequestDispatcher("401.jsp").forward(request, response);
+		}
+
 		String movieIDstr = request.getParameter("movieAddedToCart");
-//		request.getSession().setAttribute("movieAddedToCart", movie);
 
 		backend.DBConnection dbConnection = new backend.DBConnection();
-		backend.CartInsertion cartInsertion = new backend.CartInsertion(dbConnection.get_connection());
+//		backend.CartInsertion cartInsertion = new backend.CartInsertion(dbConnection.get_connection());
 
-		String userEmail = (String) request.getSession().getAttribute("user_email");
 		int movieID = Integer.parseInt(movieIDstr);
-		System.out.println(movieIDstr);
-		System.out.println(userEmail);
-		cartInsertion.insertMovieIntoCart(userEmail, movieID, 0);  // need to implement num_copy
 
-//		request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
+		ArrayList<backend.Movie> shoppingCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
+		backend.SingleMovie singleMovie = new backend.SingleMovie(dbConnection.get_connection());
+		backend.Movie movie = singleMovie.getSingleMovie(movieID);
+
+		shoppingCart.add(movie);
+		request.getSession().setAttribute("shoppingCart", shoppingCart);
+
+//		String userEmail = (String) request.getSession().getAttribute("user_id");
+//		cartInsertion.insertMovieIntoCart(userEmail, movieID, 0);  // need to implement num_copy
+
+		request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -48,6 +48,10 @@
         <servlet-name>Confirmation</servlet-name>
         <servlet-class>servlet.Confirmation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuantityManager</servlet-name>
+        <servlet-class>servlet.QuantityManager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>Confirmation</servlet-name>
         <url-pattern>/Confirmation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuantityManager</servlet-name>
+        <url-pattern>/QuantityManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

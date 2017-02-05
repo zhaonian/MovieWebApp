@@ -6,8 +6,8 @@
 package backend;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,29 +16,30 @@ import java.util.logging.Logger;
  *
  * @author Luan
  */
-public class UserVerification {
+public class SalesInsertion {
 
 	private Connection dbConnection;
 
-	public UserVerification(Connection dbConnection) {
+	public SalesInsertion(Connection dbConnection) {
 		this.dbConnection = dbConnection;
 	}
 
-	public ResultSet verifyUser(String email, String passwd) {
-		ResultSet result = null;
+	public void insertSales(int customer_id, int movie_id) {
 		try {
-			String select = "SELECT id FROM customers "
-				+ "WHERE email = ? AND password = ?;";
-
+			String select = "INSERT INTO sales(id, customer_id, movie_id, sale_date) "
+				+ "VALUES(NULL, ?, ?, ?);";
+			
 			PreparedStatement preparedStatement;
 			preparedStatement = dbConnection.prepareStatement(select);
-			preparedStatement.setString(1, email);
-			preparedStatement.setString(2, passwd);
-			result = preparedStatement.executeQuery();
-
+			preparedStatement.setInt(1, customer_id);
+			preparedStatement.setInt(2, movie_id);
+			preparedStatement.setDate(3, Date.valueOf(java.time.LocalDate.now()));
+			
+			preparedStatement.executeUpdate();
+			
 		} catch (SQLException ex) {
-			Logger.getLogger(UserVerification.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(SalesInsertion.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return result;
+		
 	}
 }

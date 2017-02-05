@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
  */
 package servlet;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,11 +28,14 @@ public class SingleMovie extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
+		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
+			request.getRequestDispatcher("401.jsp").forward(request, response);
+		}
 		backend.DBConnection dbConnection = new backend.DBConnection();
 		backend.SingleMovie singleMovie = new backend.SingleMovie(dbConnection.get_connection());
 		int movieID = Integer.parseInt(request.getParameter("id"));
-		ResultSet result = singleMovie.getSingleMovie(movieID);
-		request.setAttribute("result", result);
+		backend.Movie Movie = singleMovie.getSingleMovie(movieID);
+		request.setAttribute("movie", Movie);
 		request.getRequestDispatcher("singleMovie.jsp").forward(request, response);
 	}
 

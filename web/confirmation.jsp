@@ -13,20 +13,22 @@
     </head>
     <body>
         <h1>Confirmation</h1>
+	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home</a></h2>
+
         <%
-                if ((boolean) request.getAttribute("confirmed")) {
+		if ((boolean) request.getAttribute("confirmed")) {
         %>
         <h2>
             Transaction succeeds! Thank You!
         </h2>
         <%
-        } else {
+	} else {
         %>
         <h2>
             Wrong credit card info. Please try again.
         </h2>
         <%
-                }
+		}
         %>
     </body>
 </html>

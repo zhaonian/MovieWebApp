@@ -29,18 +29,15 @@ public class Search extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
+		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
+			request.getRequestDispatcher("401.jsp").forward(request, response);
+		}
 
 		String titlePattern = request.getParameter("title");
 		String yearFrom = request.getParameter("yearFrom");
 		String yearTo = request.getParameter("yearTo");
 		String director = request.getParameter("director");
 		String star = request.getParameter("star");
-
-//		System.out.println("title: " + titlePattern);
-//		System.out.println(yearFrom + " to " + yearTo);
-//		System.out.println("director: " + director);
-//		System.out.println("star: " + star);
 
 		backend.DBConnection dbConnection = new backend.DBConnection();
 		backend.Search search = new backend.Search(dbConnection.get_connection());

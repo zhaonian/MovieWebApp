@@ -6,7 +6,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +29,10 @@ public class Browse extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
+		
+		if (!(boolean)request.getSession().getAttribute("loggedIn")) {
+			request.getRequestDispatcher("401.jsp").forward(request, response);
+		}
 		
 		backend.DBConnection dbConnection = new backend.DBConnection();
 		backend.Browse browse = new backend.Browse(dbConnection.get_connection());

@@ -6,6 +6,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-public class Index extends HttpServlet {
+public class QuantityManager extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and
@@ -28,9 +29,21 @@ public class Index extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		request.getRequestDispatcher("home.jsp").forward(request, response);
-		boolean loggedIn = false;
-		request.getSession().setAttribute("loggedIn", loggedIn);
+		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
+			request.getRequestDispatcher("401.jsp").forward(request, response);
+		}
+		try {
+			int qty = Integer.parseInt(request.getParameter("quantity"));
+
+			if (request.getParameter("submit").equals("update")) {
+				request.getSession().setAttribute("quantity", qty);
+			} else {
+				request.getSession().setAttribute("quantity", qty);
+			}
+			request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
+		} catch (Exception e) {
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+		}
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

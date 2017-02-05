@@ -27,8 +27,10 @@ public class MoviesByWhat {
 	public ResultSet getMoviesByGenre(String genre) {
 		ResultSet result = null;
 		try {
-			String select = "SELECT * FROM movies NATURAL JOIN genres "
-				+ "WHERE genres.name = ?";
+			String select = "SELECT * FROM movies, genres, genres_in_movies "
+				+ "WHERE movies.id = genres_in_movies.movie_id "
+				+ "AND genres.id = genres_in_movies.genre_id "
+				+ "AND genres.name = ?;";
 			PreparedStatement preparedStatement;
 			preparedStatement = dbConnection.prepareStatement(select);
 			preparedStatement.setString(1, genre);
@@ -42,7 +44,10 @@ public class MoviesByWhat {
 	public ResultSet getMoviesByTitle(String c) {
 		ResultSet result = null;
 		try {
-			String select = "SELECT * FROM movies WHERE title LIKE ?;";
+			String select = "SELECT * FROM movies, genres, genres_in_movies "
+				+ "WHERE movies.id = genres_in_movies.movie_id "
+				+ "AND genres.id = genres_in_movies.genre_id "
+				+ "AND movies.title LIKE ?;";
 			PreparedStatement preparedStatement;
 			preparedStatement = dbConnection.prepareStatement(select);
 			preparedStatement.setString(1, c + "%");

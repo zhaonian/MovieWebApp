@@ -24,21 +24,47 @@ public class SingleMovie {
 		this.dbConnection = dbConnection;
 	}
 
-	public ResultSet getSingleMovie(int movieID) {
-		ResultSet result = null;
+	public backend.Movie getSingleMovie(int movieID) {
+		backend.Movie movie = new backend.Movie();
+
 		try {
-			String select = "SELECT * FROM movies NATURAL JOIN stars NATURAL JOIN genres "
-				+ "WHERE movies.id = ?;";
+			String select1 = "SELECT * FROM movies, stars, stars_in_movies "
+				+ "WHERE movies.id = stars_in_movies.movie_id "
+				+ "AND stars.id = stars_in_movies.star_id "
+				+ "AND movies.id = ?;";
+			
+			String select2 = "SELECT * FROM movies, genres, genres_in_movies "
+				+ "WHERE movies.id = genres_in_movies.movie_id "
+				+ "AND genres.id = genres_in_movies.genre_id "
+				+ "AND movies.id = ?;";
 
-			PreparedStatement preparedStatement;
-			preparedStatement = dbConnection.prepareStatement(select);
-			preparedStatement.setInt(1, movieID);
+			PreparedStatement preparedStatementStar;
+			preparedStatementStar = dbConnection.prepareStatement(select1);
+			preparedStatementStar.setInt(1, movieID);
+			ResultSet resultStar = preparedStatementStar.executeQuery();
 
-			result = preparedStatement.executeQuery();
+			PreparedStatement preparedStatementGenre;
+			preparedStatementGenre = dbConnection.prepareStatement(select2);
+			preparedStatementGenre.setInt(1, movieID);
+			ResultSet resultGenre = preparedStatementGenre.executeQuery();
 
+			while (resultStar.next()) {
+				movie.setId(resultStar.getInt("id"));
+				movie.setYear(resultStar.getInt("year"));
+				movie.setTitle(resultStar.getString("title"));
+				movie.setDirector(resultStar.getString("director"));
+				movie.setTrailer(resultStar.getString("trailer_url"));
+				movie.setBanner_url(resultStar.getString("banner_url"));
+//				movie.setListStars(resultStar.getArray("first_name")); // no last name!!!!!
+				
+			}
+			while (resultGenre.next()) {
+//				movie.setListGenres(resultGenre.getArray("name"));
+			}
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(SingleMovie.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return result;
+		return movie;
 	}
 }

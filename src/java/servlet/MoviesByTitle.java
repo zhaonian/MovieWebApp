@@ -7,6 +7,10 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,12 +33,34 @@ public class MoviesByTitle extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		String firstLetter = request.getParameter("title");
-		backend.DBConnection dbConnection = new backend.DBConnection();
-		backend.MoviesByWhat moviesByWhat = new backend.MoviesByWhat(dbConnection.get_connection());
-		ResultSet result = moviesByWhat.getMoviesByTitle(firstLetter);
-		request.setAttribute("result", result);
-		request.getRequestDispatcher("movieList.jsp").forward(request, response);
+		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
+			request.getRequestDispatcher("401.jsp").forward(request, response);
+		}
+		try {
+			String firstLetter = request.getParameter("title");
+			backend.DBConnection dbConnection = new backend.DBConnection();
+			backend.MoviesByWhat moviesByWhat = new backend.MoviesByWhat(dbConnection.get_connection());
+
+			ResultSet result = moviesByWhat.getMoviesByTitle(firstLetter);
+			ArrayList<backend.Movie> arrayMovie = new ArrayList<>();
+
+			while (result.next()) {
+				backend.Movie movie = new backend.Movie();
+
+				movie.setId(result.getInt("id"));
+				movie.setTitle(result.getString("title"));
+				movie.setYear(result.getInt("year"));
+				movie.setDirector(result.getString("director"));
+				movie.setBanner_url(result.getString("banner_url"));
+
+				arrayMovie.add(movie);
+			}
+			request.setAttribute("arrayMovie", arrayMovie);
+			request.getRequestDispatcher("movieList.jsp").forward(request, response);
+
+		} catch (SQLException ex) {
+			Logger.getLogger(MoviesByTitle.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

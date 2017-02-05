@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href=<%=request.getContextPath()+"/css/meteor.css"%> rel="stylesheet" type="text/css" />
+        <link href=<%=request.getContextPath() + "/css/meteor.css"%> rel="stylesheet" type="text/css" />
         <title>Main Page</title>
     </head>
     <body style="background-image: url(sky.png);
@@ -18,6 +18,9 @@
           background-attachment: fixed;
           background-position: center;">
         <h1>Main Page</h1>
+	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart</a></h2>
+	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search</a></h2>
+	
         <a href=<%=request.getContextPath() + "/search.jsp"%>>Search</a>
         <a href=<%=request.getContextPath() + "/Browse"%>>Browse</a>
     </body>

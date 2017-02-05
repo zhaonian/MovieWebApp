@@ -6,6 +6,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,20 +33,28 @@ public class Login extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		
-		backend.DBConnection dbConnection = new backend.DBConnection();
-		backend.UserVerification userVerification = new backend.UserVerification(dbConnection.get_connection());
-		
-		String email = request.getParameter("email");
-		String passwd = request.getParameter("password");
-		
-		if (userVerification.verifyUser(email, passwd)) {
-			request.getRequestDispatcher("mainPage.jsp").forward(request, response);
-			request.getSession().setAttribute("user_email", email);
-		}
-		else {
+
+		try {
+			backend.DBConnection dbConnection = new backend.DBConnection();
+			backend.UserVerification userVerification = new backend.UserVerification(dbConnection.get_connection());
+
+			String email = request.getParameter("email");
+			String passwd = request.getParameter("password");
+
+			ResultSet result = userVerification.verifyUser(email, passwd);
+			while (result.next()) {
+				request.getRequestDispatcher("mainPage.jsp").forward(request, response);
+				request.getSession().setAttribute("user_id", result.getInt("id"));
+				boolean loggedIn = true;
+				request.getSession().setAttribute("loggedIn", loggedIn);
+
+				ArrayList<backend.Movie> arrayMovie = new ArrayList<>();
+				request.getSession().setAttribute("shoppingCart", arrayMovie);
+			}
 			request.getRequestDispatcher("401.jsp").forward(request, response);
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 

@@ -6,7 +6,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,21 +29,30 @@ public class Confirmation extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		
+		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
+			request.getRequestDispatcher("401.jsp").forward(request, response);
+		}
 		backend.DBConnection dbConnection = new backend.DBConnection();
 		backend.Confirmation confirmation = new backend.Confirmation(dbConnection.get_connection());
-		
+
 		String firstname = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String cardNumber = request.getParameter("creditCard");
 		String expDate = request.getParameter("expDate");
-		
+
 		boolean confirmed = confirmation.verifyCreditCard(firstname, lastName, cardNumber, expDate);
+		if (confirmed) {
+			backend.SalesInsertion salesInsertion = new backend.SalesInsertion(dbConnection.get_connection());
+			ArrayList<backend.Movie> moviesInCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
+			for (backend.Movie movie : moviesInCart) {
+				System.out.println("a------------" + movie.getTitle());
+				salesInsertion.insertSales((int) request.getSession().getAttribute("user_id"), movie.getId());
+			}
+		}
+		
+		request.getSession().setAttribute("shoppingCart", new ArrayList<backend.Movie>());
 		request.setAttribute("confirmed", confirmed);
 		request.getRequestDispatcher("confirmation.jsp").forward(request, response);
-		
-		
-		
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

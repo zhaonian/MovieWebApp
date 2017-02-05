@@ -27,11 +27,15 @@ public class Sortation {
 	public ResultSet sortMovies(String sortByWhat) {
 		ResultSet result = null;
 		try {
-			String select = "SELECT * FROM movies ORDER BY ?;";
+			String select;
+			if (sortByWhat.equals("title")) {
+				select = "SELECT * FROM movies ORDER BY title;";
+			} else {
+				select = "SELECT * FROM movies ORDER BY year;";
+			}
 
 			PreparedStatement preparedStatement;
 			preparedStatement = dbConnection.prepareStatement(select);
-			preparedStatement.setString(1, sortByWhat);
 			result = preparedStatement.executeQuery();
 
 		} catch (SQLException ex) {

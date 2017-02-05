@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href=<%=request.getContextPath()+"/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
+        <link href=<%=request.getContextPath() + "/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Search Page</title>
     </head>
@@ -18,6 +18,9 @@
           background-size: cover;
           background-attachment: fixed;
           background-position: center;">
+	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart</a></h2>
+	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home</a></h2>
+
         <form action=<%=request.getContextPath() + "/Search"%> method="POST">
             <div>
                 <h1>Title</h1>

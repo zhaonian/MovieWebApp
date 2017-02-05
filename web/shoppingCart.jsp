@@ -4,6 +4,7 @@
     Author     : Luan
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,8 +14,10 @@
         <link href=<%=request.getContextPath() + "/css/meteor.css"%> rel="stylesheet" type="text/css" />
         <title>Shopping Cart</title>
     </head>
-    <body class=''>
+    <body>
         <h1>Shopping Cart</h1>
+	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home</a></h2>
+	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search</a></h2>
         <table border="4">
             <tr>
                 <th>Title</th>
@@ -25,40 +28,43 @@
             </tr>
 
             <%
-                    backend.DBConnection dbConnection = new backend.DBConnection();
-                    backend.SingleMovie singleMovie = new backend.SingleMovie(dbConnection.get_connection());
-                    ResultSet result = singleMovie.getSingleMovie(Integer.parseInt(request.getParameter("movieAddedToCart")));
-                    while (result.next()) {
+		    ArrayList<backend.Movie> shoppingCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
+//                    ResultSet result = singleMovie.getSingleMovie(Integer.parseInt(request.getParameter("movieAddedToCart")));
+//                    while (result.next()) {
+		    for (backend.Movie movie : shoppingCart) {
+
             %>
             <tr>
                 <td>
-                    <%
-                            out.print(result.getString("title"));
+                    <%			    out.print(movie.getTitle());
                     %>
                 </td>
                 <td>
-                    $1.00
+                    1
                 </td>
+	    <form action=<%=request.getContextPath() + "/QuantityManager"%> method="POST">
                 <td>
-                    <input type="text" name="quantity" placeholder="eg. 1">    
-                </td>
-                <td>
-                    <input type="submit" value="Update">
-                </td>
-                <td>
-                    <input type="submit" value="Remove">
-                </td>
-            </tr>
-            <%
-                    }
-            %>
-        </table>
-        <h3>
-            Total: $
-            <%
-                    out.print(request.getParameter("quantity"));
-            %>
-        </h3>
-        <a href="<%=request.getContextPath() + "/checkOut.jsp"%>">Check Out</a>
-    </body>
+
+		    <input type="text" name="quantity" placeholder="eg. 1">    
+		</td>
+		<td>
+		    <input type="submit" name="submit" value="Update">
+		</td>
+		<td>
+		    <input type="submit" name="submit" value="Remove">
+		</td>
+	    </form>
+	</tr>
+	<%
+		}
+	%>
+    </table>
+    <h3>
+	Total: $
+	<%
+		out.print(request.getSession().getAttribute("quantity"));
+	%>
+    </h3>
+    <a href="<%=request.getContextPath() + "/checkOut.jsp"%>">Check Out</a>
+</body>
 </html>
