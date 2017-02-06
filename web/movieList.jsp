@@ -23,28 +23,51 @@
 	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart</a></h2>
 	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home</a></h2>
 	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search</a></h2>
-	
+	<div>
+	    <form action="<%=request.getContextPath() + "/NumPerPage"%>">
+		<select name="numPerPage">
+		    <option value="5">5</option>
+		    <option value="10">10</option>
+		    <option value="20">20</option>
+		    <option value="50">50</option>
+		</select>
+		<input type="submit" value="change it now!">
+	    </form>
+	</div>
+	<br>
+	<a href=""><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;previous page</a> 
+	&nbsp;&nbsp;&nbsp;
+	<a href="">next page&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+
         <table border="1">
             <tr>
 		<th>banner</th>
                 <th>id</th>
                 <th>
-                    <a href="<%=request.getContextPath() + "/sortMovie?method=title"%>">title</a>
+		    title
+                    <a href="<%=request.getContextPath() + "/sortMovie?method=titleAsc"%>"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></a> &nbsp;
+		    <a href="<%=request.getContextPath() + "/sortMovie?method=titleDesc"%>"><i class="fa fa-sort-alpha-desc" aria-hidden="true"></i></a>
                 </th>
                 <th>
-                    <a href="<%=request.getContextPath() + "/sortMovie?method=year"%>">year</a>
+		    year
+                    <a href="<%=request.getContextPath() + "/sortMovie?method=yearAsc"%>"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i></a> &nbsp;
+		    <a href="<%=request.getContextPath() + "/sortMovie?method=yearDesc"%>"><i class="fa fa-sort-numeric-desc" aria-hidden="true"></i></a>
                 </th>
                 <th>director</th>
+		<th>genres</th>
+		<th>stars</th>
                 <th>add into shopping cart</th>
             </tr>
             <%
 		    ArrayList<backend.Movie> arrayMovie = (ArrayList<backend.Movie>) request.getAttribute("arrayMovie");
+		    request.getSession().setAttribute("arrayMovie", arrayMovie);
+		    backend.DBConnection dbConnection = new backend.DBConnection();
 		    for (backend.Movie movie : arrayMovie) {
+
             %>
             <tr>
 		<td>
-		    <%
-			    out.print("<img src='" + movie.getBanner_url() + "' style='width:200px;height:230px;'/>");
+		    <%			    out.print("<img src='" + movie.getBanner_url() + "' style='width:200px;height:230px;'/>");
 		    %>
 		</td>
                 <td>
@@ -69,6 +92,24 @@
 			    out.print("<div>" + movie.getDirector() + "</div>");
                     %>
                 </td>
+		<td>
+                    <%
+			    backend.SingleMovie singleMovie = new backend.SingleMovie(dbConnection.get_connection());
+			    backend.Movie m = singleMovie.getSingleMovie(movie.getId());
+			    for (String genre : m.getListGenres()) {
+				    out.print("<div>" + genre + "</div>");
+			    }
+                    %>
+                </td>                
+		<td>
+                    <%
+			    for (String star : m.getListStars()) {
+		    %>
+		    <a  href = "<%=request.getContextPath() + "/SingleStar?star="%> + <%out.print(star);%>"><%out.print(star);%></a>
+		    <%
+			    }
+                    %>
+                </td>
                 <td>
                     <%
 			    out.print("<form action=" + request.getContextPath()
@@ -82,8 +123,6 @@
 				    + "</button>"
 				    + "</div>"
 				    + "</form>");
-//                            out.print("<a href='" + request.getContextPath() + "/shoppingCart.jsp?id=" + result.getInt("id") + ">"
-//                                    + result.getInt("id") + "</a>");
                     %>
                 </td>
             </tr>
@@ -91,7 +130,5 @@
 		    }
             %>
         </table>
-
-
     </body>
 </html>

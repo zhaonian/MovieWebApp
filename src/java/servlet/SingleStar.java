@@ -5,10 +5,9 @@
  */
 package servlet;
 
-import backend.DBConnection;
-import backend.Sortation;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-public class SortMovie extends HttpServlet {
+public class SingleStar extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and
@@ -34,14 +33,16 @@ public class SortMovie extends HttpServlet {
 		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
 			request.getRequestDispatcher("401.jsp").forward(request, response);
 		}
-		String sortByWhat = request.getParameter("method");
-		backend.DBConnection dbConnection = new DBConnection();
-		backend.Sortation sortMovie = new Sortation(dbConnection.get_connection());
 
-		ArrayList<backend.Movie> arrayMovie = sortMovie.InsertionSort(sortByWhat, (ArrayList<backend.Movie>) request.getSession().getAttribute("arrayMovie"));
-
-		request.setAttribute("arrayMovie", arrayMovie);
-		request.getRequestDispatcher("movieList.jsp").forward(request, response);
+		String firstName = request.getParameter("star").trim().split(" ")[0];
+		String lastName = request.getParameter("star").trim().split(" ")[request.getParameter("star").trim().split(" ").length - 1];
+		backend.DBConnection dbConnection = new backend.DBConnection();
+		backend.SingleStar singleStar = new backend.SingleStar(dbConnection.get_connection());
+		
+		backend.Star star = singleStar.getStarInfo(firstName, lastName);
+		
+		request.setAttribute("singleStar", star);
+		request.getRequestDispatcher("singleStar.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

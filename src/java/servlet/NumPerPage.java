@@ -5,9 +5,8 @@
  */
 package servlet;
 
-import backend.DBConnection;
-import backend.Sortation;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-public class SortMovie extends HttpServlet {
+public class NumPerPage extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and
@@ -31,17 +30,32 @@ public class SortMovie extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
+//		response.setContentType("text/html;charset=UTF-8");
+//		try (PrintWriter out = response.getWriter()) {
+//			/* TODO output your page here. You may use following sample code. */
+//			out.println("<!DOCTYPE html>");
+//			out.println("<html>");
+//			out.println("<head>");
+//			out.println("<title>Servlet NumPerPage</title>");			
+//			out.println("</head>");
+//			out.println("<body>");
+//			out.println("<h1>Servlet NumPerPage at " + request.getContextPath() + "</h1>");
+//			out.println("</body>");
+//			out.println("</html>");
+//		}
 		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
 			request.getRequestDispatcher("401.jsp").forward(request, response);
 		}
-		String sortByWhat = request.getParameter("method");
-		backend.DBConnection dbConnection = new DBConnection();
-		backend.Sortation sortMovie = new Sortation(dbConnection.get_connection());
-
-		ArrayList<backend.Movie> arrayMovie = sortMovie.InsertionSort(sortByWhat, (ArrayList<backend.Movie>) request.getSession().getAttribute("arrayMovie"));
-
-		request.setAttribute("arrayMovie", arrayMovie);
-		request.getRequestDispatcher("movieList.jsp").forward(request, response);
+		
+		ArrayList<backend.Movie> totalArrayMovie = 
+			(ArrayList<backend.Movie>) request.getSession().getAttribute("arrayMovie");
+		
+		int numPerPage = Integer.parseInt(request.getParameter("numPerPage"));
+		
+//		ArrayList<backend.Movie> arrayMovie = totalArrayMovie.subList(numPerPage, numPerPage)
+//		int numPage = totalArrayMovie.size()/numPerPage;
+		
+		
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

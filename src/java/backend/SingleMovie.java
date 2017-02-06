@@ -5,10 +5,12 @@
  */
 package backend;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +50,8 @@ public class SingleMovie {
 			preparedStatementGenre.setInt(1, movieID);
 			ResultSet resultGenre = preparedStatementGenre.executeQuery();
 
+			ArrayList<String> starNames = new ArrayList<>();
+			
 			while (resultStar.next()) {
 				movie.setId(resultStar.getInt("id"));
 				movie.setYear(resultStar.getInt("year"));
@@ -55,12 +59,15 @@ public class SingleMovie {
 				movie.setDirector(resultStar.getString("director"));
 				movie.setTrailer(resultStar.getString("trailer_url"));
 				movie.setBanner_url(resultStar.getString("banner_url"));
-//				movie.setListStars(resultStar.getArray("first_name")); // no last name!!!!!
-				
+				starNames.add(resultStar.getString("first_name") + " " + resultStar.getString("last_name"));	
 			}
+			movie.setListStars(starNames);
+
+			ArrayList<String> genres = new ArrayList<>();
 			while (resultGenre.next()) {
-//				movie.setListGenres(resultGenre.getArray("name"));
+				genres.add(resultGenre.getString("name"));
 			}
+			movie.setListGenres(genres);
 			
 		} catch (SQLException ex) {
 			Logger.getLogger(SingleMovie.class.getName()).log(Level.SEVERE, null, ex);

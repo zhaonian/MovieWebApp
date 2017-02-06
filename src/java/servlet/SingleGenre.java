@@ -6,7 +6,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-//@WebServlet(name = "ShoppingCart", urlPatterns = {"/ShoppingCart"})
-public class ShoppingCart extends HttpServlet {
+public class SingleGenre extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and
@@ -30,43 +33,49 @@ public class ShoppingCart extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
+		try {
+			if (!(boolean) request.getSession().getAttribute("loggedIn")) {
+				request.getRequestDispatcher("401.jsp").forward(request, response);
+			}
+			String genre = request.getParameter("genre").trim();
+			
+			backend.DBConnection dbConnection = new backend.DBConnection();
+			backend.MoviesByWhat moviesByWhat = new backend.MoviesByWhat(dbConnection.get_connection());
 
-		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
-			request.getRequestDispatcher("401.jsp").forward(request, response);
+			ResultSet result = moviesByWhat.getMoviesByGenre(genre);
+
+			ArrayList<backend.Movie> arrayMovie = new ArrayList<>();
+
+//			ArrayList<String> listGenres = new ArrayList<>();
+			while (result.next()) {
+				backend.Movie movie = new backend.Movie();
+
+				movie.setId(result.getInt("id"));
+				movie.setTitle(result.getString("title"));
+				movie.setYear(result.getInt("year"));
+				movie.setDirector(result.getString("director"));
+				movie.setBanner_url(result.getString("banner_url"));
+				arrayMovie.add(movie);
+			}
+			request.setAttribute("arrayMovie", arrayMovie);
+			request.getRequestDispatcher("movieList.jsp").forward(request, response);
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(SingleGenre.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
-		String movieIDstr = request.getParameter("movieAddedToCart");
-
-		backend.DBConnection dbConnection = new backend.DBConnection();
-//		backend.CartInsertion cartInsertion = new backend.CartInsertion(dbConnection.get_connection());
-
-		int movieID = Integer.parseInt(movieIDstr);
-
-		ArrayList<backend.Movie> shoppingCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
-		backend.SingleMovie singleMovie = new backend.SingleMovie(dbConnection.get_connection());
-		backend.Movie movie = singleMovie.getSingleMovie(movieID);
-
-		if (!shoppingCart.contains(movie)) {
-			shoppingCart.add(movie);
-		}
-		request.getSession().setAttribute("shoppingCart", shoppingCart);
-
-//		String userEmail = (String) request.getSession().getAttribute("user_id");
-//		cartInsertion.insertMovieIntoCart(userEmail, movieID, 0);  // need to implement num_copy
-
-		request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
 	}
 
-	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-	/**
-	 * Handles the HTTP <code>GET</code> method.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
-	@Override
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 		processRequest(request, response);

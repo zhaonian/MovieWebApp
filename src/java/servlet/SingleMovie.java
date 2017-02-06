@@ -33,7 +33,7 @@ public class SingleMovie extends HttpServlet {
 		}
 		backend.DBConnection dbConnection = new backend.DBConnection();
 		backend.SingleMovie singleMovie = new backend.SingleMovie(dbConnection.get_connection());
-		int movieID = Integer.parseInt(request.getParameter("id"));
+		int movieID = Integer.parseInt(request.getParameter("id").trim());
 		backend.Movie Movie = singleMovie.getSingleMovie(movieID);
 		request.setAttribute("movie", Movie);
 		request.getRequestDispatcher("singleMovie.jsp").forward(request, response);

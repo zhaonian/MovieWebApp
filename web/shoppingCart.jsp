@@ -26,45 +26,42 @@
                 <th>update</th>
                 <th>remove</th>
             </tr>
-
-            <%
-		    ArrayList<backend.Movie> shoppingCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
-//                    ResultSet result = singleMovie.getSingleMovie(Integer.parseInt(request.getParameter("movieAddedToCart")));
-//                    while (result.next()) {
-		    for (backend.Movie movie : shoppingCart) {
-
-            %>
-            <tr>
-                <td>
-                    <%			    out.print(movie.getTitle());
-                    %>
-                </td>
-                <td>
-                    1
-                </td>
 	    <form action=<%=request.getContextPath() + "/QuantityManager"%> method="POST">
-                <td>
+		<%
+			ArrayList<backend.Movie> shoppingCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
+			for (backend.Movie movie : shoppingCart) {
 
-		    <input type="text" name="quantity" placeholder="eg. 1">    
-		</td>
-		<td>
-		    <input type="submit" name="submit" value="Update">
-		</td>
-		<td>
-		    <input type="submit" name="submit" value="Remove">
-		</td>
+		%>
+		<tr>
+		    <td>
+			<%			    out.print(movie.getTitle());
+			%>
+		    </td>
+		    <td>
+			1
+		    </td>
+		    <td>
+			<input type="text" name=<%=movie.getId()%> placeholder="eg. 1">    
+		    </td>
+		    <td>
+			<input type="submit" name="submit" value="update">
+		    </td>
+		    <td>
+			<input type="submit" name="submit" value="remove">
+		    </td>
+
+		</tr>
+		<%
+			}
+		%>
 	    </form>
-	</tr>
-	<%
-		}
-	%>
-    </table>
-    <h3>
-	Total: $
-	<%
-		out.print(request.getSession().getAttribute("quantity"));
-	%>
-    </h3>
-    <a href="<%=request.getContextPath() + "/checkOut.jsp"%>">Check Out</a>
-</body>
+	</table>
+	<h3>
+	    Total: $
+	    <%
+		    out.print(request.getAttribute("quantity"));
+	    %>
+	</h3>
+	<a href="<%=request.getContextPath() + "/checkOut.jsp"%>">Check Out</a>
+    </body>
 </html>

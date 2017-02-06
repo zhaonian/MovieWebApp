@@ -52,6 +52,18 @@
         <servlet-name>QuantityManager</servlet-name>
         <servlet-class>servlet.QuantityManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NumPerPage</servlet-name>
+        <servlet-class>servlet.NumPerPage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SingleStar</servlet-name>
+        <servlet-class>servlet.SingleStar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SingleGenre</servlet-name>
+        <servlet-class>servlet.SingleGenre</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -95,6 +107,18 @@
     <servlet-mapping>
         <servlet-name>QuantityManager</servlet-name>
         <url-pattern>/QuantityManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NumPerPage</servlet-name>
+        <url-pattern>/NumPerPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SingleStar</servlet-name>
+        <url-pattern>/SingleStar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SingleGenre</servlet-name>
+        <url-pattern>/SingleGenre</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

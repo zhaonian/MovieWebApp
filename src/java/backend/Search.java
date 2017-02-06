@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,22 +26,37 @@ public class Search {
 		this.dbConnection = dbConnection;
 	}
 
-	public ResultSet getMovieByTitle(String titlePattern) {
+	public ResultSet getMovieByTitle(String titlePattern, String year, String director, String starFirstName, String starLastName) {
 		ArrayList<Integer> arrayID = new ArrayList<>();
 		ResultSet result = null;
 		try {
-			String select = "SELECT * FROM movies "
-				+ "WHERE title LIKE ?;";
+			String sql = "SELECT * FROM movies, stars, stars_in_movies "
+				+ "WHERE movies.id = stars_in_movies.movie_id "
+				+ "AND stars.id = stars_in_movies.star_id ";
 
-			PreparedStatement preparedStatement;
-			preparedStatement = dbConnection.prepareStatement(select);
-			preparedStatement.setString(1, "%" + titlePattern + "%");
-			result = preparedStatement.executeQuery();
+			if (!titlePattern.equals("")) {
+				sql = sql + "AND title LIKE '%" + titlePattern + "%' ";
+			}
+			if (!year.equals("")) {
+				sql = sql + "AND movies.year = " + Integer.parseInt(year) + " ";
+			}
+			if (!director.equals("")) {
+				sql = sql + "AND director LIKE '%" + director + "%' ";
+			}
+			if (!starFirstName.equals("")) {
+				sql = sql + "AND stars.first_name LIKE '%" + starFirstName + "%' ";
+			}
+			if (!starLastName.equals("")) {
+				sql = sql + "AND stars.last_name LIKE '%" + starLastName + "%' ";
+			}
+			sql = sql + ";";
+
+			Statement select = dbConnection.createStatement();
+			result = select.executeQuery(sql);
 
 		} catch (SQLException ex) {
 			Logger.getLogger(UserVerification.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return result;
-
 	}
 }

@@ -44,7 +44,8 @@ public class MoviesByGenre extends HttpServlet {
 
 			ResultSet result = moviesByWhat.getMoviesByGenre(request.getParameter("genre"));
 			ArrayList<backend.Movie> arrayMovie = new ArrayList<>();
-
+			
+			ArrayList<String> listGenres = new ArrayList<>();
 			while (result.next()) {
 				backend.Movie movie = new backend.Movie();
 
@@ -53,10 +54,10 @@ public class MoviesByGenre extends HttpServlet {
 				movie.setYear(result.getInt("year"));
 				movie.setDirector(result.getString("director"));
 				movie.setBanner_url(result.getString("banner_url"));
-
+//				listGenres.add(result.getString("genres.name"));
 				arrayMovie.add(movie);
 			}
-
+//			movie.setListGenres(listGenres);
 			request.setAttribute("arrayMovie", arrayMovie);
 			request.getRequestDispatcher("movieList.jsp").forward(request, response);
 

@@ -19,12 +19,13 @@
         <div class="container">
             <form action=<%=request.getContextPath() + "/Login"%> method="POST">
                 <div class="form-input">
-                    <input type="text" name="email" placeholder="Enter Email">
+                    <input class="input" type="text" name="email" placeholder="Enter Email">
                 </div>
 
                 <div class="form-input">
-                    <input type="password" name="password" placeholder="Enter Password">
+                    <input class="input" type="password" name="password" placeholder="Enter Password">
                 </div>
+		<br>
                 <input type="submit" value="Login" class="btn-login">
             </form>
         </div>

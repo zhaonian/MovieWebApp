@@ -6,7 +6,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,18 +32,38 @@ public class QuantityManager extends HttpServlet {
 		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
 			request.getRequestDispatcher("401.jsp").forward(request, response);
 		}
-		try {
-			int qty = Integer.parseInt(request.getParameter("quantity"));
 
-			if (request.getParameter("submit").equals("update")) {
-				request.getSession().setAttribute("quantity", qty);
-			} else {
-				request.getSession().setAttribute("quantity", qty);
+		int qty = 0;
+
+		if (request.getParameter("submit").equals("update")) {
+			ArrayList<backend.Movie> movies
+				= (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
+			for (backend.Movie movie : movies) {
+				try {
+					int temp = Integer.parseInt(request.getParameter("" + movie.getId()));
+					if (temp >= 0) {
+						qty = qty + temp;
+					}
+				} catch (Exception e) {
+					continue;
+				}
 			}
-			request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
-		} catch (Exception e) {
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			request.setAttribute("quantity", qty);
+		} else {
+			for (backend.Movie movie : (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart")) {
+				try {
+					int temp = Integer.parseInt(request.getParameter("" + movie.getId()));
+					if (qty >= temp) {
+						qty = qty - temp;
+					}
+				} catch (Exception e) {
+					continue;
+				}
+			}
+			request.setAttribute("quantity", qty);
 		}
+		request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
+
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

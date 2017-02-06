@@ -27,8 +27,23 @@
 		    out.print("<div> ID: " + movie.getId() + "</div>");
 		    out.print("<div> Year: " + movie.getYear() + "</div>");
 		    out.print("<div> Director: " + movie.getDirector() + "</div>");
-		    out.print("<div> Genres: " + movie.getListGenres() + "</div>");
-		    out.print("<div> Stars: " + movie.getListStars() + "</div>");
+
+		    out.print("<div> Genres: ");
+		    for (String genre : movie.getListGenres()) {
+	    %>
+	    <a href="<%=request.getContextPath() + "/SingleGenre?genre="%> + <%out.print(genre);%>"><%out.print(genre);%></a>
+	    <%
+		    }
+		    out.print("</div>");
+
+		    out.print("<div> Stars: ");
+		    for (String star : movie.getListStars()) {
+	    %>
+	    <a href="<%=request.getContextPath() + "/SingleStar?star="%> + <%out.print(star);%>"><%out.print(star);%></a>
+	    <%
+		    }
+		    out.print("</div>");
+
 		    out.print("<div> Trailer: " + movie.getTrailer() + "</div>");
 		    out.print("<img src='" + movie.getBanner_url() + "'/>");
             %>

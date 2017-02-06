@@ -7,6 +7,10 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,19 +36,36 @@ public class Search extends HttpServlet {
 		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
 			request.getRequestDispatcher("401.jsp").forward(request, response);
 		}
+		try {
+			String titlePattern = request.getParameter("title");
+			String year = request.getParameter("year");
+			String director = request.getParameter("director");
+			String starFirstName = request.getParameter("starFirstName");
+			String starLastName = request.getParameter("starLastName");
 
-		String titlePattern = request.getParameter("title");
-		String yearFrom = request.getParameter("yearFrom");
-		String yearTo = request.getParameter("yearTo");
-		String director = request.getParameter("director");
-		String star = request.getParameter("star");
+			backend.DBConnection dbConnection = new backend.DBConnection();
+			backend.Search search = new backend.Search(dbConnection.get_connection());
+			ResultSet result = search.getMovieByTitle(titlePattern, year, director, starFirstName, starLastName);
 
-		backend.DBConnection dbConnection = new backend.DBConnection();
-		backend.Search search = new backend.Search(dbConnection.get_connection());
-		ResultSet result = search.getMovieByTitle(titlePattern);
+			ArrayList<backend.Movie> arrayMovie = new ArrayList<>();
 
-		request.setAttribute("result", result);
-		request.getRequestDispatcher("movieList.jsp").forward(request, response);
+			while (result.next()) {
+				backend.Movie movie = new backend.Movie();
+
+				movie.setId(result.getInt("id"));
+				movie.setTitle(result.getString("title"));
+				movie.setYear(result.getInt("year"));
+				movie.setDirector(result.getString("director"));
+				movie.setBanner_url(result.getString("banner_url"));
+
+				arrayMovie.add(movie);
+			}
+			request.setAttribute("arrayMovie", arrayMovie);
+			request.getRequestDispatcher("movieList.jsp").forward(request, response);
+		} catch (SQLException ex) {
+			Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
 	}
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

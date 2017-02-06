@@ -29,9 +29,7 @@
 
             <div>
                 <h1>Year Released</h1>
-                <input type="text" name="yearFrom" placeholder="e.g. 1994">
-                &nbsp; to &nbsp;
-                <input type="text" name="yearTo" placeholder="e.g. 2017">
+                <input type="text" name="year" placeholder="e.g. 1994">
             </div>
 
             <div>
@@ -40,8 +38,11 @@
             </div>
 
             <div>
-                <h1>Star</h1>
-                <input type="text" name="star" placeholder="e.g. Tom Cruise or Cruise">
+                <h1>Star first name</h1>
+                <input type="text" name="starFirstName" placeholder="e.g. Tom">
+		&nbsp;&nbsp;
+                <h1>Star last name</h1>
+                <input type="text" name="starLastName" placeholder="e.g. Cruise">
             </div>
             <br>
             <br>

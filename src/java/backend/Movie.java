@@ -5,7 +5,7 @@
 */
 package backend;
 
-import java.sql.Array;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,16 +18,16 @@ public class Movie {
 	private int year;
 	private String title;
 	private String director;
-	private Array listGenres;
+	private ArrayList<String> listGenres;
 	private String banner_url;
-	private Array listStars;
+	private ArrayList<String> listStars;
 	private String trailer;
 
 	public Movie() {
 
 	}
 
-	public Movie(int id, int year, String title, String director, Array listGenres, String banner_url, Array listStars, String trailer) {
+	public Movie(int id, int year, String title, String director, ArrayList<String> listGenres, String banner_url, ArrayList<String> listStars, String trailer) {
 		this.id = id;
 		this.year = year;
 		this.title = title;
@@ -36,6 +36,7 @@ public class Movie {
 		this.banner_url = banner_url;
 		this.listStars = listStars;
 		this.trailer = trailer;
+		
 	}
 	
 	//getters
@@ -55,7 +56,7 @@ public class Movie {
 		return director;
 	}
 	
-	public Array getListGenres() {
+	public ArrayList<String> getListGenres() {
 		return listGenres;
 	}
 	
@@ -63,7 +64,7 @@ public class Movie {
 		return banner_url;
 	}
 	
-	public Array getListStars() {
+	public ArrayList<String> getListStars() {
 		return listStars;
 	}
 	
@@ -88,7 +89,7 @@ public class Movie {
 		this.director = director;
 	}
 	
-	public void setListGenres(Array listGenres) {
+	public void setListGenres(ArrayList<String> listGenres) {
 		this.listGenres = listGenres;
 	}
 	
@@ -96,7 +97,7 @@ public class Movie {
 		this.banner_url = banner_url;
 	}
 	
-	public void setListStars(Array listStars) {
+	public void setListStars(ArrayList<String> listStars) {
 		this.listStars = listStars;
 	}
 	
