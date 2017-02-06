@@ -60,8 +60,8 @@ public class Search extends HttpServlet {
 
 				arrayMovie.add(movie);
 			}
-			request.setAttribute("arrayMovie", arrayMovie);
-			request.getRequestDispatcher("movieList.jsp").forward(request, response);
+			request.getSession().setAttribute("arrayMovie", arrayMovie);
+			request.getRequestDispatcher("NumPerPage").forward(request, response);
 		} catch (SQLException ex) {
 			Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
 		}

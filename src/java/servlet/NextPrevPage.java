@@ -36,8 +36,21 @@ public class NextPrevPage extends HttpServlet {
 			Integer s = Integer.parseInt(request.getParameter("s"));
 			request.setAttribute("s", numPerPage + s);
 			request.setAttribute("numPerPage", numPerPage);
-			
+
 			request.getRequestDispatcher("movieList.jsp").forward(request, response);
+
+		} else if (request.getParameter("method").equals("prev")) {
+			Integer numPerPage = Integer.parseInt(request.getParameter("numPerPage"));
+			Integer s = Integer.parseInt(request.getParameter("s"));
+			int temp = s - numPerPage;
+			if (temp < 0) {
+				temp = 0;
+			}
+			request.setAttribute("s", temp);
+			request.setAttribute("numPerPage", numPerPage);
+
+			request.getRequestDispatcher("movieList.jsp").forward(request, response);
+
 		}
 	}
 
