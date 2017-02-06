@@ -55,8 +55,8 @@ public class MoviesByTitle extends HttpServlet {
 
 				arrayMovie.add(movie);
 			}
-			request.setAttribute("arrayMovie", arrayMovie);
-			request.getRequestDispatcher("movieList.jsp").forward(request, response);
+			request.getSession().setAttribute("arrayMovie", arrayMovie);
+			request.getRequestDispatcher("/NumPerPage").forward(request, response);
 
 		} catch (SQLException ex) {
 			Logger.getLogger(MoviesByTitle.class.getName()).log(Level.SEVERE, null, ex);

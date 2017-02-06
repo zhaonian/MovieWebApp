@@ -7,7 +7,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-public class NumPerPage extends HttpServlet {
+public class NextPrevPage extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and
@@ -30,39 +29,16 @@ public class NumPerPage extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-//		response.setContentType("text/html;charset=UTF-8");
-//		try (PrintWriter out = response.getWriter()) {
-//			/* TODO output your page here. You may use following sample code. */
-//			out.println("<!DOCTYPE html>");
-//			out.println("<html>");
-//			out.println("<head>");
-//			out.println("<title>Servlet NumPerPage</title>");			
-//			out.println("</head>");
-//			out.println("<body>");
-//			out.println("<h1>Servlet NumPerPage at " + request.getContextPath() + "</h1>");
-//			out.println("</body>");
-//			out.println("</html>");
-//		}
-		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
-			request.getRequestDispatcher("401.jsp").forward(request, response);
+
+		if (request.getParameter("method").equals("next")) {
+
+			Integer numPerPage = Integer.parseInt(request.getParameter("numPerPage"));
+			Integer s = Integer.parseInt(request.getParameter("s"));
+			request.setAttribute("s", numPerPage + s);
+			request.setAttribute("numPerPage", numPerPage);
+			
+			request.getRequestDispatcher("movieList.jsp").forward(request, response);
 		}
-		
-		ArrayList<backend.Movie> totalArrayMovie = 
-			(ArrayList<backend.Movie>) request.getSession().getAttribute("arrayMovie");
-		
-		Integer numPerPage;
-		try {
-			numPerPage = Integer.parseInt(request.getParameter("numPerPage"));
-			if (numPerPage == null) {
-				throw new Exception();
-			}
-		} catch (Exception ex) {
-			numPerPage = 5;
-		}
-		
-		request.setAttribute("numPerPage", numPerPage);
-		request.setAttribute("s", 0);
-		request.getRequestDispatcher("movieList.jsp").forward(request, response);		
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -40,8 +40,8 @@ public class SortMovie extends HttpServlet {
 
 		ArrayList<backend.Movie> arrayMovie = sortMovie.InsertionSort(sortByWhat, (ArrayList<backend.Movie>) request.getSession().getAttribute("arrayMovie"));
 
-		request.setAttribute("arrayMovie", arrayMovie);
-		request.getRequestDispatcher("movieList.jsp").forward(request, response);
+		request.getSession().setAttribute("arrayMovie", arrayMovie);
+		request.getRequestDispatcher("/NumPerPage").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

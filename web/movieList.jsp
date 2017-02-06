@@ -35,9 +35,19 @@
 	    </form>
 	</div>
 	<br>
-	<a href=""><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;previous page</a> 
+	<a href="<%=request.getContextPath()
+		+ "/NextPrevPage?method=prev&numPerPage="
+		+ request.getAttribute("numPerPage") + "&s="
+		+ request.getAttribute("s")%>">
+	    <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;
+	    previous page</a> 
 	&nbsp;&nbsp;&nbsp;
-	<a href="">next page&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+	<a href="<%=request.getContextPath()
+		+ "/NextPrevPage?method=next&numPerPage="
+		+ request.getAttribute("numPerPage") + "&s="
+		+ request.getAttribute("s")%>">next page&nbsp;
+	    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+	</a>
 
         <table border="1">
             <tr>
@@ -59,11 +69,13 @@
                 <th>add into shopping cart</th>
             </tr>
             <%
-		    ArrayList<backend.Movie> arrayMovie = (ArrayList<backend.Movie>) request.getAttribute("arrayMovie");
-		    request.getSession().setAttribute("arrayMovie", arrayMovie);
+		    ArrayList<backend.Movie> arrayMovie = (ArrayList<backend.Movie>) request.getSession().getAttribute("arrayMovie");
 		    backend.DBConnection dbConnection = new backend.DBConnection();
-		    for (backend.Movie movie : arrayMovie) {
+		    int s = (Integer) request.getAttribute("s");
+		    int numPerPage = (Integer) request.getAttribute("numPerPage");
 
+		    for (int i = s; i < s + numPerPage && i < arrayMovie.size(); i++) {
+			    backend.Movie movie = arrayMovie.get(i);
             %>
             <tr>
 		<td>
