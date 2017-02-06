@@ -42,26 +42,38 @@ public class QuantityManager extends HttpServlet {
 				try {
 					int temp = Integer.parseInt(request.getParameter("" + movie.getId()));
 					if (temp >= 0) {
-						qty = qty + temp;
+						qty = temp;
 					}
 				} catch (Exception e) {
 					continue;
 				}
+				request.getSession().setAttribute("" + movie.getId(), qty);
+				if ((boolean) request.getSession().getAttribute("updateRemoveClicked") || movies.size() > 1) {
+					request.getSession().setAttribute("total", (int) request.getSession().getAttribute("total") + qty);
+				} else {
+					request.getSession().setAttribute("total", qty);
+				}
 			}
-			request.setAttribute("quantity", qty);
+
 		} else {
 			for (backend.Movie movie : (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart")) {
+				int temp;
 				try {
-					int temp = Integer.parseInt(request.getParameter("" + movie.getId()));
-					if (qty >= temp) {
-						qty = qty - temp;
+					temp = Integer.parseInt(request.getParameter("" + movie.getId()));
+					if (temp >= 0) {
+						qty = (int) request.getSession().getAttribute("total") - temp;
 					}
 				} catch (Exception e) {
 					continue;
 				}
+				request.getSession().setAttribute("" + movie.getId(), qty);
+				if ((boolean) request.getSession().getAttribute("updateRemoveClicked")) {
+
+					request.getSession().setAttribute("total", (int) request.getSession().getAttribute("total") - temp);
+				}
 			}
-			request.setAttribute("quantity", qty);
 		}
+		request.getSession().setAttribute("updateRemoveClicked", true);
 		request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
 
 	}

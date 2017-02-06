@@ -46,14 +46,25 @@ public class ShoppingCart extends HttpServlet {
 		backend.SingleMovie singleMovie = new backend.SingleMovie(dbConnection.get_connection());
 		backend.Movie movie = singleMovie.getSingleMovie(movieID);
 
-		if (!shoppingCart.contains(movie)) {
-			shoppingCart.add(movie);
+//		if (!shoppingCart.contains(movie)) {
+		boolean duplicatedMovieExist = false;
+		for (backend.Movie m : shoppingCart) {
+			if (m.getId() == movie.getId()) {
+				duplicatedMovieExist = true;
+			}
 		}
+		if (!duplicatedMovieExist) {
+			request.getSession().setAttribute("" + movie.getId(), 1);
+			shoppingCart.add(movie);
+
+		} else {
+			request.getSession().setAttribute("" + movie.getId(), (int) request.getSession().getAttribute("" + movie.getId()) + 1);
+		}
+		request.getSession().setAttribute("total", (int) request.getSession().getAttribute("total") + 1);
 		request.getSession().setAttribute("shoppingCart", shoppingCart);
 
 //		String userEmail = (String) request.getSession().getAttribute("user_id");
 //		cartInsertion.insertMovieIntoCart(userEmail, movieID, 0);  // need to implement num_copy
-
 		request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
 	}
 

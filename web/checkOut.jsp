@@ -15,10 +15,10 @@
     </head>
     <body>
         <h1><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Check Out</h1>
-	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart</a></h2>
-	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home</a></h2>
-	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search</a></h2>
-	
+	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home <i class="fa fa-home" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search <i class="fa fa-search" aria-hidden="true"></i></a></h2>
+
         <div style='padding-left: 30%;'>
             <form action=<%=request.getContextPath() + "/Confirmation"%> method="POST">
                 <div>

@@ -16,14 +16,28 @@
         <title>Movie Info</title>
     </head>
     <body>
-	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart</a></h2>
-	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home</a></h2>
-	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search</a></h2>
+	<h2><a href="<%=request.getContextPath() + "/checkOut.jsp"%>">Check Out <i class="fa fa-credit-card" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home <i class="fa fa-home" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search <i class="fa fa-search" aria-hidden="true"></i></a></h2>
 
         <div>
             <%
 		    backend.Movie movie = (backend.Movie) request.getAttribute("movie");
 		    out.print("<h2> Title: " + movie.getTitle() + "</h2>");
+
+		    out.print("<form action=" + request.getContextPath()
+			    + "/ShoppingCart"
+			    + " method='POST'>"
+			    + "<div style='padding-left: 35%;'>"
+			    + "<button value=" + movie.getId()
+			    + " name='movieAddedToCart'>"
+			    + "<i class='fa fa-shopping-cart' aria-hidden='true'></i>"
+			    + "&nbsp;add"
+			    + "</button>"
+			    + "</div>"
+			    + "</form>");
+
 		    out.print("<div> ID: " + movie.getId() + "</div>");
 		    out.print("<div> Year: " + movie.getYear() + "</div>");
 		    out.print("<div> Director: " + movie.getDirector() + "</div>");
@@ -47,6 +61,7 @@
 		    out.print("<div> Trailer: " + movie.getTrailer() + "</div>");
 		    out.print("<img src='" + movie.getBanner_url() + "'/>");
             %>
+
         </div>
     </body>
 </html>

@@ -27,7 +27,8 @@ public class Confirmation {
 	public boolean verifyCreditCard(String firstName, String lastName, String creditCard, String expDate) {
 		String select = "SELECT * FROM creditcards WHERE first_name = ? "
 			+ "AND last_name = ? "
-			+ "AND id = ? "
+			+ "AND (REPLACE(REPLACE(id, ' ', ''), '-', '') = ? "
+			+ "OR id = ?) "
 			+ "AND expiration = ?;";
 
 		ResultSet result;
@@ -39,7 +40,8 @@ public class Confirmation {
 			preparedStatement.setString(1, firstName);
 			preparedStatement.setString(2, lastName);
 			preparedStatement.setString(3, creditCard);
-			preparedStatement.setString(4, expDate);
+			preparedStatement.setString(4, creditCard);
+			preparedStatement.setString(5, expDate);
 
 			result = preparedStatement.executeQuery();
 

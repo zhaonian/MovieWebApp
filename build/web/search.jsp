@@ -18,8 +18,10 @@
           background-size: cover;
           background-attachment: fixed;
           background-position: center;">
-	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart</a></h2>
-	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home</a></h2>
+	<h2><a href="<%=request.getContextPath() + "/checkOut.jsp"%>">Check Out <i class="fa fa-credit-card" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home <i class="fa fa-home" aria-hidden="true"></i></a></h2>
+
 
         <form action=<%=request.getContextPath() + "/Search"%> method="POST">
             <div>

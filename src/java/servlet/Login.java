@@ -50,6 +50,8 @@ public class Login extends HttpServlet {
 
 				ArrayList<backend.Movie> arrayMovie = new ArrayList<>();
 				request.getSession().setAttribute("shoppingCart", arrayMovie);
+				request.getSession().setAttribute("total", 0);
+				request.getSession().setAttribute("updateRemoveClicked", false);
 			}
 			request.getRequestDispatcher("401.jsp").forward(request, response);
 			

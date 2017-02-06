@@ -45,12 +45,14 @@ public class Confirmation extends HttpServlet {
 			backend.SalesInsertion salesInsertion = new backend.SalesInsertion(dbConnection.get_connection());
 			ArrayList<backend.Movie> moviesInCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
 			for (backend.Movie movie : moviesInCart) {
-				System.out.println("a------------" + movie.getTitle());
-				salesInsertion.insertSales((int) request.getSession().getAttribute("user_id"), movie.getId());
+				for (int i = 0; i < (int) request.getSession().getAttribute("" + movie.getId()); i++) {
+					salesInsertion.insertSales((int) request.getSession().getAttribute("user_id"), movie.getId());
+				}
 			}
 		}
-		
+
 		request.getSession().setAttribute("shoppingCart", new ArrayList<backend.Movie>());
+		request.getSession().setAttribute("total", 0);
 		request.setAttribute("confirmed", confirmed);
 		request.getRequestDispatcher("confirmation.jsp").forward(request, response);
 	}

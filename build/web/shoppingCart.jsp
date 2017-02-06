@@ -12,56 +12,68 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href=<%=request.getContextPath() + "/css/meteor.css"%> rel="stylesheet" type="text/css" />
+	<link href=<%=request.getContextPath() + "/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
         <title>Shopping Cart</title>
     </head>
     <body>
         <h1>Shopping Cart</h1>
-	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home</a></h2>
-	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search</a></h2>
+	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home <i class="fa fa-home" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search <i class="fa fa-search" aria-hidden="true"></i></a></h2>
         <table border="4">
             <tr>
                 <th>Title</th>
                 <th>Price</th>
-                <th>Qty</th>
+                <th>Manage Qty</th>
                 <th>update</th>
                 <th>remove</th>
+		<th>Current Qty</th>
             </tr>
-	    <form action=<%=request.getContextPath() + "/QuantityManager"%> method="POST">
-		<%
-			ArrayList<backend.Movie> shoppingCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
-			for (backend.Movie movie : shoppingCart) {
 
-		%>
-		<tr>
-		    <td>
-			<%			    out.print(movie.getTitle());
-			%>
-		    </td>
-		    <td>
-			1
-		    </td>
-		    <td>
-			<input type="text" name=<%=movie.getId()%> placeholder="eg. 1">    
-		    </td>
-		    <td>
-			<input type="submit" name="submit" value="update">
-		    </td>
-		    <td>
-			<input type="submit" name="submit" value="remove">
-		    </td>
-
-		</tr>
-		<%
-			}
-		%>
-	    </form>
-	</table>
-	<h3>
-	    Total: $
 	    <%
-		    out.print(request.getAttribute("quantity"));
+		    ArrayList<backend.Movie> shoppingCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
+		    for (backend.Movie movie : shoppingCart) {
+
 	    %>
-	</h3>
-	<a href="<%=request.getContextPath() + "/checkOut.jsp"%>">Check Out</a>
-    </body>
+	    <tr>
+		<td>
+		    <%				out.print(movie.getTitle());
+		    %>
+		</td>
+		<td>
+		    1
+		</td>
+	    <form action=<%=request.getContextPath() + "/QuantityManager"%> method="POST">
+		<td>
+		    <input type="text" name=<%=movie.getId()%> placeholder="eg. 1">    
+		</td>
+		<td>
+		    <input type="submit" name="submit" value="update">
+		</td>
+		<td>
+		    <input type="submit" name="submit" value="remove">
+		</td>
+	    </form>
+	    <td>
+		<%
+			out.print(request.getSession().getAttribute("" + movie.getId()));
+		%>
+	    </td>
+
+
+	</tr>
+	<%
+		}
+	%>
+
+    </table>
+    <h3>
+	Total: $
+	<%
+		out.print(request.getSession().getAttribute("total"));
+	%>
+
+
+    </h3>
+    <a href="<%=request.getContextPath() + "/checkOut.jsp"%>">Check Out</a>
+</body>
 </html>
