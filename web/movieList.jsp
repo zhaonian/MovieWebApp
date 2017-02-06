@@ -20,9 +20,9 @@
           background-size: cover;
           background-attachment: fixed;
           background-position: center;">
-	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart</a></h2>
-	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home</a></h2>
-	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search</a></h2>
+	<h2><a href="<%=request.getContextPath() + "/shoppingCart.jsp"%>">my cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home <i class="fa fa-home" aria-hidden="true"></i></a></h2>
+	<h2><a href="<%=request.getContextPath() + "/search.jsp"%>">advanced search <i class="fa fa-search" aria-hidden="true"></i></a></h2>
 	<div>
 	    <form action="<%=request.getContextPath() + "/NumPerPage"%>">
 		<select name="numPerPage">
@@ -31,7 +31,7 @@
 		    <option value="20">20</option>
 		    <option value="50">50</option>
 		</select>
-		<input type="submit" value="change it now!">
+		<input type="submit" value="change layout now!">
 	    </form>
 	</div>
 	<br>
