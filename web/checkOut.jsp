@@ -36,6 +36,6 @@
                 <input type="submit" value="Check Out" class="btn-login">
             </form>
         </div>
-
+	<h2><a href="<%=request.getContextPath() + "/Logout"%>">Log Out</a></h2>
     </body>
 </html>

@@ -53,6 +53,7 @@
                     width: 100px; height: 40px;">
                 <i class="fa fa-search" aria-hidden="true"></i> Search
             </button>
-        </form>    
+        </form>  
+	<h2><a href="<%=request.getContextPath() + "/Logout"%>">Log Out</a></h2>
     </body>
 </html>

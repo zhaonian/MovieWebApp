@@ -24,5 +24,6 @@
 
         <a href=<%=request.getContextPath() + "/search.jsp"%>>Search</a>
         <a href=<%=request.getContextPath() + "/Browse"%>>Browse</a>
+	<h2><a href="<%=request.getContextPath() + "/Logout"%>">Log Out</a></h2>
     </body>
 </html>

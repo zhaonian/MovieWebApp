@@ -1,0 +1,3 @@
+cd project2_27;
+ant
+deploy the war file on AWS tomcat

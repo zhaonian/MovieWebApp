@@ -19,7 +19,7 @@
 	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home <i class="fa fa-home" aria-hidden="true"></i></a></h2>
 
         <%
-		if ((boolean) request.getAttribute("confirmed")) {
+		if ((Integer) request.getAttribute("confirmed") == 1) {
         %>
         <h2>
             Transaction succeeds! Thank You!
@@ -34,4 +34,5 @@
 		}
         %>
     </body>
+    <h2><a href="<%=request.getContextPath() + "/Logout"%>">Log Out</a></h2>
 </html>

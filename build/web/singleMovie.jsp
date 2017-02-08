@@ -63,5 +63,6 @@
             %>
 
         </div>
+	<h2><a href="<%=request.getContextPath() + "/Logout"%>">Log Out</a></h2>
     </body>
 </html>

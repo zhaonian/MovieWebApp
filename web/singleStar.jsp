@@ -34,6 +34,6 @@
 		out.print("<img src='" + star.getPicture_url() + "'/>");
 
 	%>
-
+	<h2><a href="<%=request.getContextPath() + "/Logout"%>">Log Out</a></h2>
     </body>
 </html>
