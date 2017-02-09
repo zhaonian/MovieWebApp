@@ -6,6 +6,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,7 +35,24 @@ public class Login extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 
-		try {
+		try {        
+			// Output stream to STDOUT
+			PrintWriter out = response.getWriter();
+
+			String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+			System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
+			// Verify CAPTCHA.
+			boolean valid = backend.VerifyUtils.verify(gRecaptchaResponse);
+			if (!valid) {
+				//errorString = "Captcha invalid!";
+				out.println("<HTML>"
+					+ "<HEAD><TITLE>"
+					+ "MovieDB: Error"
+					+ "</TITLE></HEAD>\n<BODY>"
+					+ "<P>Recaptcha WRONG!!!! </P></BODY></HTML>");
+				return;
+			}
+			
 			backend.DBConnection dbConnection = new backend.DBConnection();
 			backend.UserVerification userVerification = new backend.UserVerification(dbConnection.get_connection());
 
@@ -54,7 +72,7 @@ public class Login extends HttpServlet {
 				request.getSession().setAttribute("updateRemoveClicked", false);
 			}
 			request.getRequestDispatcher("401.jsp").forward(request, response);
-			
+
 		} catch (SQLException ex) {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
 		}

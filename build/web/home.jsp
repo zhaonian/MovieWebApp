@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html charset=UTF-8"/>
         <link href=<%=request.getContextPath() + "/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
         <link href=<%=request.getContextPath() + "/css/meteor.css"%> rel="stylesheet" type="text/css" />
+	<script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
 
     <body>
@@ -27,6 +28,7 @@
                 </div>
 		<br>
                 <input type="submit" value="Login" class="btn-login">
+		<div class="g-recaptcha" data-sitekey="6Ld55xQUAAAAABslVbsAVbgHjmDRq-4p9PSdQNL4"></div>
             </form>
         </div>
     </body>
