@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-public class Login extends HttpServlet {
+public class EmployeeLogIn extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and
@@ -34,8 +34,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-
-		try {        
+		try {
 			// Output stream to STDOUT
 			PrintWriter out = response.getWriter();
 
@@ -52,27 +51,25 @@ public class Login extends HttpServlet {
 					+ "<P>Recaptcha WRONG!!!! </P></BODY></HTML>");
 				return;
 			}
-			
+
 			backend.DBConnection dbConnection = new backend.DBConnection();
 			backend.UserVerification userVerification = new backend.UserVerification(dbConnection.get_connection());
 
 			String email = request.getParameter("email");
 			String passwd = request.getParameter("password");
 
-			ResultSet result = userVerification.verifyUser(email, passwd);
-			if (result.next()) {
-				request.getSession().setAttribute("user_id", result.getInt("id"));
-				boolean loggedIn = true;
-				request.getSession().setAttribute("loggedIn", loggedIn);
+			ResultSet result = userVerification.verifyEmployee(email, passwd);
 
-				ArrayList<backend.Movie> arrayMovie = new ArrayList<>();
-				request.getSession().setAttribute("shoppingCart", arrayMovie);
-				request.getSession().setAttribute("total", 0);
-				request.getSession().setAttribute("updateRemoveClicked", false);
-				
-				request.getRequestDispatcher("mainPage.jsp").forward(request, response);
-			}
-			else {
+			int starInsertSucceed = 0;
+			request.setAttribute("starInsertSucceed", starInsertSucceed);
+			request.setAttribute("infoArray", new ArrayList<>());
+
+			if (result.next()) {
+				boolean employeeloggedIn = true;
+				request.getSession().setAttribute("employeeloggedIn", employeeloggedIn);
+
+				request.getRequestDispatcher("dbManager.jsp").forward(request, response);
+			} else {
 				request.getRequestDispatcher("401.jsp").forward(request, response);
 			}
 

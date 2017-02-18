@@ -5,8 +5,12 @@
  */
 package backend;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -73,5 +77,59 @@ public class Star {
 
 	public void setMovieList(ArrayList<Movie> movieList) {
 		this.movieList = movieList;
+	}
+	
+	
+	// insert a star into the database
+	public boolean insertStar(Connection connection, String namesFromWeb) {
+
+		String[] names = getNames(namesFromWeb);
+		String firstName = names[0];
+		String lastName = names[1];
+
+		int result = 0;
+		try {
+			String select1 = "INSERT INTO stars(id, first_name, last_name, dob, photo_url) "
+				+ "VALUES(NULL, ?, ?, NULL, NULL);";
+
+			PreparedStatement preparedStatement;
+
+			preparedStatement = connection.prepareStatement(select1);
+			preparedStatement.setString(1, firstName);
+			preparedStatement.setString(2, lastName);
+
+			result = preparedStatement.executeUpdate();
+			
+			if (result == 1) {
+				return true;
+			}
+			
+		} catch (SQLException ex) {
+			System.out.println("SQL Error when insert star: " + ex);
+		}
+		return false;
+	}
+	
+	// get single name
+	public static String[] getNames(String namesFromWeb) {
+
+		String[] names = new String[2];
+
+		try {
+			System.out.print("Name: ");
+			String[] temp =namesFromWeb.split(" ");
+			if (temp.length == 1) {
+				names[0] = "";
+				names[1] = Arrays.asList(temp).get(0);
+
+			} else {
+				names[0] = temp[0];
+				names[1] = temp[1];
+			}
+
+		} catch (Exception e) {
+			System.out.println("Invalid Name");
+		}
+		return names;
 	}
 }

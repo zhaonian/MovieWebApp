@@ -7,11 +7,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luan
  */
-public class Login extends HttpServlet {
+public class _dashboard extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and
@@ -34,51 +29,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-
-		try {        
-			// Output stream to STDOUT
-			PrintWriter out = response.getWriter();
-
-			String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-			System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
-			// Verify CAPTCHA.
-			boolean valid = backend.VerifyUtils.verify(gRecaptchaResponse);
-			if (!valid) {
-				//errorString = "Captcha invalid!";
-				out.println("<HTML>"
-					+ "<HEAD><TITLE>"
-					+ "MovieDB: Error"
-					+ "</TITLE></HEAD>\n<BODY>"
-					+ "<P>Recaptcha WRONG!!!! </P></BODY></HTML>");
-				return;
-			}
-			
-			backend.DBConnection dbConnection = new backend.DBConnection();
-			backend.UserVerification userVerification = new backend.UserVerification(dbConnection.get_connection());
-
-			String email = request.getParameter("email");
-			String passwd = request.getParameter("password");
-
-			ResultSet result = userVerification.verifyUser(email, passwd);
-			if (result.next()) {
-				request.getSession().setAttribute("user_id", result.getInt("id"));
-				boolean loggedIn = true;
-				request.getSession().setAttribute("loggedIn", loggedIn);
-
-				ArrayList<backend.Movie> arrayMovie = new ArrayList<>();
-				request.getSession().setAttribute("shoppingCart", arrayMovie);
-				request.getSession().setAttribute("total", 0);
-				request.getSession().setAttribute("updateRemoveClicked", false);
-				
-				request.getRequestDispatcher("mainPage.jsp").forward(request, response);
-			}
-			else {
-				request.getRequestDispatcher("401.jsp").forward(request, response);
-			}
-
-		} catch (SQLException ex) {
-			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		request.getRequestDispatcher("dashBoard.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : home.jsp
-    Created on : Jan 22, 2017, 4:25:30 PM
+    Document   : _dashboard
+    Created on : Feb 15, 2017, 3:42:00 PM
     Author     : Luan
 --%>
 
@@ -8,16 +8,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html charset=UTF-8"/>
-        <link href=<%=request.getContextPath() + "/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href=<%=request.getContextPath() + "/css/font-awesome.css"%> rel="stylesheet" type="text/css" />
         <link href=<%=request.getContextPath() + "/css/meteor.css"%> rel="stylesheet" type="text/css" />
 	<script src='https://www.google.com/recaptcha/api.js'></script>
+        <title>Employee Dashboard</title>
     </head>
-
     <body>
-        <h1 align="center"><i class="fa fa-film" aria-hidden="true"></i>  Welcome to Zhaonian Luan's Movie Web App!</h1>
+	<h1 align="center"><i class="fa fa-users" aria-hidden="true"></i>  Welcome to Employee's Dashboard!</h1>
         <div class="container">
-            <form action=<%=request.getContextPath() + "/Login"%> method="POST">
+            <form action=<%=request.getContextPath() + "/EmployeeLogIn"%> method="POST">
                 <div class="form-input">
                     <input class="input" type="text" name="email" placeholder="Enter Email">
                 </div>

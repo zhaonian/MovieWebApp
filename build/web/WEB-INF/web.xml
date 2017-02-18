@@ -64,6 +64,18 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>servlet.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmployeeLogIn</servlet-name>
+        <servlet-class>servlet.EmployeeLogIn</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>_dashboard</servlet-name>
+        <servlet-class>servlet._dashboard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeDashboard</servlet-name>
+        <servlet-class>servlet.EmployeeDashboard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -128,9 +140,30 @@
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeLogIn</servlet-name>
+        <url-pattern>/EmployeeLogIn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>_dashboard</servlet-name>
+        <url-pattern>/_dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeDashboard</servlet-name>
+        <url-pattern>/EmployeeDashboard</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <!--    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>HTTPSOnly</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>-->
 </web-app>

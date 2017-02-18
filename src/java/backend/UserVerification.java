@@ -41,4 +41,22 @@ public class UserVerification {
 		}
 		return result;
 	}
+
+	public ResultSet verifyEmployee(String email, String passwd) {
+		ResultSet result = null;
+		try {
+			String select = "SELECT * FROM employees "
+				+ "WHERE email = ? AND password = ?;";
+
+			PreparedStatement preparedStatement;
+			preparedStatement = dbConnection.prepareStatement(select);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, passwd);
+			result = preparedStatement.executeQuery();
+
+		} catch (SQLException ex) {
+			Logger.getLogger(UserVerification.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return result;
+	}
 }
