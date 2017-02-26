@@ -60,6 +60,9 @@ public class Search extends HttpServlet {
 
 				arrayMovie.add(movie);
 			}
+//			String method = request.getParameter("method");
+//			if (method.equals("forward"))
+				
 			request.getSession().setAttribute("arrayMovie", arrayMovie);
 			request.getRequestDispatcher("NumPerPage").forward(request, response);
 		} catch (SQLException ex) {

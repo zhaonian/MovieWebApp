@@ -37,7 +37,6 @@ public class MoviesByGenre extends HttpServlet {
 			request.getRequestDispatcher("401.jsp").forward(request, response);
 		}
 		try {
-			response.setContentType("text/html;charset=UTF-8");
 
 			backend.DBConnection dbConnection = new backend.DBConnection();
 			backend.MoviesByWhat moviesByWhat = new backend.MoviesByWhat(dbConnection.get_connection());

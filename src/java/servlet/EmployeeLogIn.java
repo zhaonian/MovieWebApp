@@ -67,7 +67,7 @@ public class EmployeeLogIn extends HttpServlet {
 			if (result.next()) {
 				boolean employeeloggedIn = true;
 				request.getSession().setAttribute("employeeloggedIn", employeeloggedIn);
-
+				request.setAttribute("insertionStatus", -1);
 				request.getRequestDispatcher("dbManager.jsp").forward(request, response);
 			} else {
 				request.getRequestDispatcher("401.jsp").forward(request, response);

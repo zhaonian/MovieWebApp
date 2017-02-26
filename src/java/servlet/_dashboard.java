@@ -29,6 +29,7 @@ public class _dashboard extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
+		request.getSession().setAttribute("employeeloggedIn", false);
 		request.getRequestDispatcher("dashBoard.jsp").forward(request, response);
 	}
 

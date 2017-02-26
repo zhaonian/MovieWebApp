@@ -15,12 +15,12 @@ import java.util.ArrayList;
 public class Movie {
 	
 	private int id;
-	private int year;
-	private String title;
-	private String director;
-	private ArrayList<String> listGenres;
+	private int year = 0;
+	private String title = "";
+	private String director = "";
+	private ArrayList<String> listGenres = new ArrayList<>();
 	private String banner_url;
-	private ArrayList<String> listStars;
+	private ArrayList<String> listStars = new ArrayList<>();
 	private String trailer;
 
 	public Movie() {
@@ -35,8 +35,7 @@ public class Movie {
 		this.listGenres = listGenres;
 		this.banner_url = banner_url;
 		this.listStars = listStars;
-		this.trailer = trailer;
-		
+		this.trailer = trailer;	
 	}
 	
 	//getters
@@ -103,5 +102,23 @@ public class Movie {
 	
 	public void setTrailer(String trailer) {
 		this.trailer = trailer;
+	}
+	
+	public void addDirector(String dir) {
+		this.director += ", " + dir;
+	}
+	
+	public void addGenre(String g) {
+		this.listGenres.add(g);
+	}
+	
+	@Override
+	public String toString() {
+		String temp = "";
+		temp += "\nTitle: " + this.getTitle() +
+			"\nYear: " + this.getYear() +
+			"\nDirectors: " + this.getDirector() +
+			"\nGenres: " + this.getListGenres().toString();
+		return temp;
 	}
 }

@@ -76,6 +76,14 @@
         <servlet-name>EmployeeDashboard</servlet-name>
         <servlet-class>servlet.EmployeeDashboard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MovieInsertion</servlet-name>
+        <servlet-class>servlet.MovieInsertion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FuzzySearch</servlet-name>
+        <servlet-class>servlet.FuzzySearch</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -151,6 +159,14 @@
     <servlet-mapping>
         <servlet-name>EmployeeDashboard</servlet-name>
         <url-pattern>/EmployeeDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MovieInsertion</servlet-name>
+        <url-pattern>/MovieInsertion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FuzzySearch</servlet-name>
+        <url-pattern>/FuzzySearch</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
