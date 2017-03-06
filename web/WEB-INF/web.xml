@@ -84,6 +84,14 @@
         <servlet-name>FuzzySearch</servlet-name>
         <servlet-class>servlet.FuzzySearch</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MovieInfo</servlet-name>
+        <servlet-class>servlet.MovieInfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MobileLogin</servlet-name>
+        <servlet-class>servlet.MobileLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -167,6 +175,14 @@
     <servlet-mapping>
         <servlet-name>FuzzySearch</servlet-name>
         <url-pattern>/FuzzySearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MovieInfo</servlet-name>
+        <url-pattern>/MovieInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MobileLogin</servlet-name>
+        <url-pattern>/MobileLogin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

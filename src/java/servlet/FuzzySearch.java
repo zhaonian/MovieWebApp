@@ -6,7 +6,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,16 +30,21 @@ public class FuzzySearch extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
-			request.getRequestDispatcher("401.jsp").forward(request, response);
-		}
-		String input = request.getParameter("fuzzySearch");
+//		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
+//			request.getRequestDispatcher("401.jsp").forward(request, response);
+//		}
+		String input = request.getParameter("title");
 		JSONArray a = new JSONArray();
-		for (int i = 0; i < 5; i++) {
-			a.add("json: " + i);
+		
+		backend.DBConnection dbConnection = new backend.DBConnection();
+		backend.FuzzySearch fuzzySearch = new backend.FuzzySearch(dbConnection.get_connection());
+		
+		ArrayList<backend.Movie> arrayMovies = fuzzySearch.getMovieByFuzzySearch(input);
+		
+		for (int i = 0; i < 5 && i < arrayMovies.size(); i++) {
+			a.add(arrayMovies.get(i).getTitle());
 		}
 		response.getWriter().print(a.toJSONString());
-		
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

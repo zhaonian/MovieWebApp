@@ -87,19 +87,20 @@
 		</td>
                 <td>
                     <%
-			    out.print("<div>" + movie.getId() + "</div>");
+			    int movieiD = movie.getId();
+			    out.print("<div>" + movieiD + "</div>");
                     %>
                 </td>
                 <td>
-                    <a href="<%=request.getContextPath() + "/SingleMovie?id=" + movie.getId()%>">
-                        <%
-				out.print("<div>" + movie.getTitle() + "</div>");
-                        %>
+                    <a class="tooltip" href="<%=request.getContextPath() + "/SingleMovie?id=" + movieiD%>" name="movieName" 
+		       value=<%=movieiD%>>
+			<%=movie.getTitle()%>
+			<span class="tooltiptext" name="MovieInfoToolTip">
+			</span>
                     </a>
                 </td>
                 <td>
-                    <%
-			    out.print("<div>" + movie.getYear() + "</div>");
+                    <%			    out.print("<div>" + movie.getYear() + "</div>");
                     %>
                 </td>
                 <td>
@@ -146,5 +147,7 @@
             %>
         </table>
 	<h2><a href="<%=request.getContextPath() + "/Logout"%>">Log Out</a></h2>
+	<script lang="javascript" src="<%=request.getContextPath() + "/js/jquery-3.1.1.js"%>"></script>
+	<script lang="javascript" src="<%=request.getContextPath() + "/js/meteor.js"%>"></script>
     </body>
 </html>

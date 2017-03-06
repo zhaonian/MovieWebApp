@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 
-		try {        
+		try {
 			// Output stream to STDOUT
 			PrintWriter out = response.getWriter();
 
@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
 					+ "<P>Recaptcha WRONG!!!! </P></BODY></HTML>");
 				return;
 			}
-			
+
 			backend.DBConnection dbConnection = new backend.DBConnection();
 			backend.UserVerification userVerification = new backend.UserVerification(dbConnection.get_connection());
 
@@ -69,10 +69,9 @@ public class Login extends HttpServlet {
 				request.getSession().setAttribute("shoppingCart", arrayMovie);
 				request.getSession().setAttribute("total", 0);
 				request.getSession().setAttribute("updateRemoveClicked", false);
-				
+
 				request.getRequestDispatcher("mainPage.jsp").forward(request, response);
-			}
-			else {
+			} else {
 				request.getRequestDispatcher("401.jsp").forward(request, response);
 			}
 

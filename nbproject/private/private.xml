@@ -3,29 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/backend/SingleMovie.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/search.jsp</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/EmployeeDashboard.java</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/MoviesByTitle.java</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/test/MovieSAXParser.java</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/web/dbManager.jsp</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/SingleStar.java</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/backend/MovieDirStarCollection.java</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/MoviesByGenre.java</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/web/css/meteor.css</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/MovieInfo.java</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/Login.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/browse.jsp</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/MovieInsertion.java</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/web/js/jquery-3.1.1.js</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/test/DatabseExtension.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/mainPage.jsp</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/Browse.java</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/EmployeeLogIn.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/js/meteor.js</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/backend/Movie.java</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/test/StarSAXParser.java</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/web/shoppingCart.jsp</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/web/home.jsp</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/NextPrevPage.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/dashBoard.jsp</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/FuzzySearch.java</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/backend/FuzzySearch.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/movieList.jsp</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/web/WEB-INF/web.xml</file>
-            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/Search.java</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/MobileLogin.java</file>
         </group>
     </open-files>
 </project-private>

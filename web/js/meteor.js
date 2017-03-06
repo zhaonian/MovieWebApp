@@ -10,7 +10,7 @@ $("#fuzzySearch").on("keypress", function (e) {
         url: "FuzzySearch",
         data: {
             method: "ajax",
-            title: title
+            title: title + String.fromCharCode(e.keyCode)
         },
         type: "GET",
         dataType: "JSON",
@@ -38,4 +38,22 @@ $("#fuzzySearch").on("keypress", function (e) {
             }
         });
     }
+});
+
+$('[name="movieName"]').on("mouseover", function (e) {
+    var value = e.currentTarget.attributes[3].value;
+    $.ajax({
+        url: "MovieInfo",
+        data: {
+            id: value
+        },
+        type: "GET",
+        dataType: "JSON",
+        success: function (movieInfo) {
+            $('[name="MovieInfoToolTip"]').empty();
+            $('[name="MovieInfoToolTip"]').append("<img src='" + movieInfo.banner + "' style='width:80px;height:100px;'/><br/>" +
+                    "Stars: " + movieInfo.stars + "<br/>" +
+                    "Year: " + movieInfo.year);
+        }
+    });
 });

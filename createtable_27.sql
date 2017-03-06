@@ -1,11 +1,12 @@
 CREATE TABLE movies (
     id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    title VARCHAR(100) NOT NULL,
+    title TEXT NOT NULL,
     year INTEGER NOT NULL,
     director VARCHAR(100) NOT NULL,
     banner_url VARCHAR(200),
-    trailer_url VARCHAR(200)
-);
+    trailer_url VARCHAR(200),
+    FULLTEXT (title)
+) ENGINE=MyISAM;
 
 CREATE TABLE stars (
 id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -46,13 +47,13 @@ CREATE TABLE creditcards (
 id VARCHAR(20) PRIMARY KEY,
 first_name VARCHAR(50) NOT NULL,
 last_name VARCHAR(50) NOT NULL,
-expiration DATE NOT NULL);         
+expiration DATE NOT NULL);
 
 CREATE TABLE employees (
     email VARCHAR(50) PRIMARY KEY,
     password VARCHAR(20) NOT NULL,
-    fullname VARCHAR(100));        
-    
+    fullname VARCHAR(100));
+
 DELIMITER $$
 CREATE PROCEDURE `add_movie`(IN `title` VARCHAR(100), IN `year` INT, IN `director` VARCHAR(100), IN `banner_url` VARCHAR(200), IN `trailer_url` VARCHAR(200), IN `first_name` VARCHAR(50), IN `genre_name` VARCHAR(32), IN `last_name` VARCHAR(50), OUT `return_value` INT(11))
 BEGIN
@@ -63,7 +64,7 @@ IF EXISTS (SELECT * FROM stars WHERE stars.first_name = first_name AND stars.las
 INSERT INTO stars_in_movies(star_id, movie_id)
 VALUES((SELECT id from stars WHERE stars.first_name = first_name AND stars.last_name = last_name), (SELECT movies.id FROM movies where title = movies.title));
 
-ELSEIF NOT EXISTS (SELECT * FROM stars WHERE stars.first_name = first_name AND stars.last_name = last_name) THEN # star not exist 
+ELSEIF NOT EXISTS (SELECT * FROM stars WHERE stars.first_name = first_name AND stars.last_name = last_name) THEN # star not exist
 INSERT INTO stars(id, first_name, last_name, dob, photo_url)
 VALUES(null, first_name, last_name, null, null);
 INSERT INTO stars_in_movies(star_id, movie_id)
