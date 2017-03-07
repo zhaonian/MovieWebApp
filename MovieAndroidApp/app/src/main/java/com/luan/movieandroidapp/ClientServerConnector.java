@@ -18,7 +18,7 @@ import java.util.Map;
  */
 
 public class ClientServerConnector {
-    private String serverURL = "http://ec2-52-25-201-11.us-west-2.compute.amazonaws.com:8080/MovieWebApp";
+    private String serverURL = "http://ec2-52-32-246-183.us-west-2.compute.amazonaws.com:8080/MovieWebApp";
     private HttpURLConnection urlConnection;
 
     public JSONObject getJsonObject(String path, Map<String, String> map) {

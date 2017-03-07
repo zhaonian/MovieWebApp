@@ -5,12 +5,15 @@
         <group>
             <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/backend/SingleMovie.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/search.jsp</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/backend/DBConnection.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/MoviesByGenre.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/css/meteor.css</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/web/META-INF/context.xml</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/MovieInfo.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/Login.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/browse.jsp</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/mainPage.jsp</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/backend/UserVerification.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/js/meteor.js</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/home.jsp</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/NextPrevPage.java</file>
@@ -19,6 +22,7 @@
             <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/backend/FuzzySearch.java</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/web/movieList.jsp</file>
             <file>file:/Users/Luan/Desktop/MovieWebApp/src/java/servlet/MobileLogin.java</file>
+            <file>file:/Users/Luan/Desktop/MovieWebApp/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

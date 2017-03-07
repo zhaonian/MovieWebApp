@@ -38,18 +38,6 @@ public class SearchActivity extends AppCompatActivity {
         this.listView = (ListView) findViewById(R.id.listView);
         this.movies = new ArrayList<>();
 
-        movies.add("one");
-        movies.add("two");
-        movies.add("three");
-        movies.add("four");
-        movies.add("five");
-        movies.add("six");
-        movies.add("seven");
-        movies.add("eight");
-        movies.add("nine");
-        movies.add("ten");
-
-
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, movies);
         listView.setAdapter(adapter);
 
@@ -60,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private class getForMoviesFromServlet extends AsyncTask<String, Void, Void> {
+    private class getMoviesFromServlet extends AsyncTask<String, Void, Void> {
 
         @Override
         protected Void doInBackground(String... params) {
@@ -87,7 +75,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 ArrayList<String> tempList = new ArrayList<>();
 
-                new getForMoviesFromServlet().execute(newText);
+                new getMoviesFromServlet().execute(newText);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     tempList.add(jsonArray.optString(i));
                 }
