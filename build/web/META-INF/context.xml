@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/MovieWebApp"/>
+<Context path="/MovieWebApp">
+<Resource name="jdbc/moviedb" auth="Container" type="javax.sql.DataSource"
+		  maxTotal="1000" maxIdle="300000000" maxWaitMillis="1000000000000000" username="root"
+		  password="password" driverClassName="com.mysql.jdbc.Driver"
+		  url="jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&amp;useSSL=false" />
+</Context>

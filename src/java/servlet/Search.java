@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,16 +34,15 @@ public class Search extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
-			request.getRequestDispatcher("401.jsp").forward(request, response);
-		}
 		try {
 			String titlePattern = request.getParameter("title");
 			String year = request.getParameter("year");
 			String director = request.getParameter("director");
 			String starFirstName = request.getParameter("starFirstName");
 			String starLastName = request.getParameter("starLastName");
-
+			
+//			System.out.println(titlePattern);
+			
 			backend.DBConnection dbConnection = new backend.DBConnection();
 			backend.Search search = new backend.Search(dbConnection.get_connection());
 			ResultSet result = search.getMovieByTitle(titlePattern, year, director, starFirstName, starLastName);
@@ -62,9 +62,14 @@ public class Search extends HttpServlet {
 			}
 //			String method = request.getParameter("method");
 //			if (method.equals("forward"))
-				
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				session.invalidate();
+			}
 			request.getSession().setAttribute("arrayMovie", arrayMovie);
 			request.getRequestDispatcher("NumPerPage").forward(request, response);
+			dbConnection.closeConnection();
+
 		} catch (SQLException ex) {
 			Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
 		}

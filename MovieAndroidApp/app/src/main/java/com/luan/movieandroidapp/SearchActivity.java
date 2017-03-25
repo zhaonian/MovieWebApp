@@ -2,6 +2,7 @@ package com.luan.movieandroidapp;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -29,6 +30,8 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<String> movies;
 
     JSONArray jsonArray = new JSONArray();
+
+    String inputTitle = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +76,11 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
+                inputTitle = newText;
+
                 ArrayList<String> tempList = new ArrayList<>();
 
-                new getMoviesFromServlet().execute(newText);
+                new getMoviesFromServlet().execute(inputTitle);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     tempList.add(jsonArray.optString(i));
                 }
@@ -92,5 +97,17 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putString("inputTitle", inputTitle);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        inputTitle = savedInstanceState.getString("inputTitle");
     }
 }

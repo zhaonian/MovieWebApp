@@ -24,7 +24,7 @@ public class Confirmation {
 		this.dbConnection = dbConnection;
 	}
 
-	public boolean verifyCreditCard(String firstName, String lastName, String creditCard, String expDate) {
+	public int verifyCreditCard(String firstName, String lastName, String creditCard, String expDate) {
 		String select = "SELECT * FROM creditcards WHERE first_name = ? "
 			+ "AND last_name = ? "
 			+ "AND (REPLACE(REPLACE(id, ' ', ''), '-', '') = ? "
@@ -46,11 +46,11 @@ public class Confirmation {
 			result = preparedStatement.executeQuery();
 
 			if (result.next()) {
-				return true;
+				return 1;
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(Confirmation.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return false;
+		return 0;
 	}
 }

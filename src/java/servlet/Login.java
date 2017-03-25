@@ -39,19 +39,19 @@ public class Login extends HttpServlet {
 			// Output stream to STDOUT
 			PrintWriter out = response.getWriter();
 
-			String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-			System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
-			// Verify CAPTCHA.
-			boolean valid = backend.VerifyUtils.verify(gRecaptchaResponse);
-			if (!valid) {
-				//errorString = "Captcha invalid!";
-				out.println("<HTML>"
-					+ "<HEAD><TITLE>"
-					+ "MovieDB: Error"
-					+ "</TITLE></HEAD>\n<BODY>"
-					+ "<P>Recaptcha WRONG!!!! </P></BODY></HTML>");
-				return;
-			}
+//			String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+//			System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
+//			// Verify CAPTCHA.
+//			boolean valid = backend.VerifyUtils.verify(gRecaptchaResponse);
+//			if (!valid) {
+//				//errorString = "Captcha invalid!";
+//				out.println("<HTML>"
+//					+ "<HEAD><TITLE>"
+//					+ "MovieDB: Error"
+//					+ "</TITLE></HEAD>\n<BODY>"
+//					+ "<P>Recaptcha WRONG!!!! </P></BODY></HTML>");
+//				return;
+//			}
 
 			backend.DBConnection dbConnection = new backend.DBConnection();
 			backend.UserVerification userVerification = new backend.UserVerification(dbConnection.get_connection());

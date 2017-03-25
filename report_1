@@ -1,0 +1,13 @@
+Single Instance version:
+    average TS per query of 1000 queries = 22916329.708
+    average TJ per query of 1000 queries = 2593063.456
+
+    The reason is probably because the "Search" servlet contains the part of "Search" backend, where I use JDBC.
+    So, the TS time contains TJ time. This is why it's bigger.
+
+
+Scaled version:
+    average TS per query of 1000 queries = 14133733.836
+    average TJ per query of 1000 queries = 14235202.566765578
+
+    I got the data from 2 separate logs, which are master and slave.

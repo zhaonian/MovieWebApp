@@ -43,9 +43,9 @@ public class NumPerPage extends HttpServlet {
 //			out.println("</body>");
 //			out.println("</html>");
 //		}
-		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
-			request.getRequestDispatcher("401.jsp").forward(request, response);
-		}
+//		if (!(boolean) request.getSession().getAttribute("loggedIn")) {
+//			request.getRequestDispatcher("401.jsp").forward(request, response);
+//		}
 		
 		ArrayList<backend.Movie> totalArrayMovie = 
 			(ArrayList<backend.Movie>) request.getSession().getAttribute("arrayMovie");

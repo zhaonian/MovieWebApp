@@ -6,7 +6,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +42,7 @@ public class MovieInfo extends HttpServlet {
 		jsonMovie.put("banner", movie.getBanner_url());
 		jsonMovie.put("stars", movie.getListStars());
 		jsonMovie.put("year", movie.getYear());
+		jsonMovie.put("id", id);
 
 		response.getWriter().print(jsonMovie.toJSONString());
 	}

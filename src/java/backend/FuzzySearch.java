@@ -31,7 +31,7 @@ public class FuzzySearch {
 			String sql = "SELECT * FROM movies WHERE MATCH (title) AGAINST (? IN BOOLEAN MODE);";
 
 			PreparedStatement preparedStatement = dbConnection.prepareStatement(sql);
-			preparedStatement.setString(1, keywords + "*");
+			preparedStatement.setString(1, "+" + keywords + "*");
 
 			result = preparedStatement.executeQuery();
 

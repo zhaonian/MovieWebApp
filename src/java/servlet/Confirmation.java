@@ -40,8 +40,8 @@ public class Confirmation extends HttpServlet {
 		String cardNumber = request.getParameter("creditCard");
 		String expDate = request.getParameter("expDate");
 
-		boolean confirmed = confirmation.verifyCreditCard(firstname, lastName, cardNumber, expDate);
-		if (confirmed) {
+		int confirmed = confirmation.verifyCreditCard(firstname, lastName, cardNumber, expDate);
+		if (confirmed == 1) {
 			backend.SalesInsertion salesInsertion = new backend.SalesInsertion(dbConnection.get_connection());
 			ArrayList<backend.Movie> moviesInCart = (ArrayList<backend.Movie>) request.getSession().getAttribute("shoppingCart");
 			for (backend.Movie movie : moviesInCart) {

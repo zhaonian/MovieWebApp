@@ -38,7 +38,6 @@ public class SingleMovie {
 				+ "WHERE movies.id = genres_in_movies.movie_id "
 				+ "AND genres.id = genres_in_movies.genre_id "
 				+ "AND movies.id = ?;";
-
 			PreparedStatement preparedStatementStar;
 			preparedStatementStar = dbConnection.prepareStatement(select1);
 			preparedStatementStar.setInt(1, movieID);

@@ -44,6 +44,7 @@ public class FuzzySearch extends HttpServlet {
 		for (int i = 0; i < 5 && i < arrayMovies.size(); i++) {
 			a.add(arrayMovies.get(i).getTitle());
 		}
+//		System.out.println("---" + a.toJSONString());
 		response.getWriter().print(a.toJSONString());
 	}
 

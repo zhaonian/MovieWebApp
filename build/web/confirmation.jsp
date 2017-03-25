@@ -19,7 +19,7 @@
 	<h2><a href="<%=request.getContextPath() + "/mainPage.jsp"%>">home <i class="fa fa-home" aria-hidden="true"></i></a></h2>
 
         <%
-		if ((Integer) request.getAttribute("confirmed") == 1) {
+		if ((Integer) request.getAttribute("confirmed") == 1) {			
         %>
         <h2>
             Transaction succeeds! Thank You!

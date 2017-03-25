@@ -27,6 +27,8 @@ public class Search {
 	}
 
 	public ResultSet getMovieByTitle(String titlePattern, String year, String director, String starFirstName, String starLastName) {
+		long startTime = System.nanoTime();
+
 		ArrayList<Integer> arrayID = new ArrayList<>();
 		ResultSet result = null;
 		try {
@@ -57,6 +59,9 @@ public class Search {
 		} catch (SQLException ex) {
 			Logger.getLogger(UserVerification.class.getName()).log(Level.SEVERE, null, ex);
 		}
+		long endTime = System.nanoTime();
+		long elapsedTime = endTime - startTime; //
+//		System.out.println(elapsedTime);
 		return result;
 	}
 }

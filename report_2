@@ -1,0 +1,5 @@
+average query time for single instance version fabflix on local machine: 13723097.1
+
+average query time for fabflix on AWS:
+    single instance version: 1410652.78
+    scaled version: 13910625.87

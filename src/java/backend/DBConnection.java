@@ -5,12 +5,28 @@
  */
 package backend;
 
+import static java.lang.System.out;
 import java.sql.*;
 import java.util.logging.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 /**
  *
  * @author Luan
+ *
+ *
+ * Context initCtx = new InitialContext(); if (initCtx == null)
+ * out.println("initCtx is NULL");
+ *
+ * Context envCtx = (Context) initCtx.lookup("java:comp/env"); if (envCtx ==
+ * null) out.println("envCtx is NULL");
+ *
+ * // Look up our data source DataSource ds = (DataSource)
+ * envCtx.lookup("jdbc/TestDB");
+ *
+ *
  */
 public class DBConnection {
 
@@ -18,18 +34,42 @@ public class DBConnection {
 
 	public DBConnection() {
 		try {
+
 			Class.forName("com.mysql.jdbc.Driver");
 
 			dbConnection = DriverManager.getConnection(
 				"jdbc:mysql://localhost:3306/moviedb",
 				"root", "password");
+//			Context initCtx = new InitialContext();
+//			if (initCtx == null) {
+//				out.println("initCtx is NULL");
+//			}
+//
+//			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+//			if (envCtx == null) {
+//				out.println("envCtx is NULL");
+//			}
+//
+//			// Look up our data source
+//			DataSource ds = (DataSource) envCtx.lookup("jdbc/moviedb");
+//			
+//			dbConnection = ds.getConnection();
 
-		} catch (ClassNotFoundException | SQLException ex) {
+		} catch (Exception ex) {
 			Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
 	public Connection get_connection() {
 		return dbConnection;
+	}
+	
+	public void closeConnection() {
+		try {
+			if (dbConnection != null)
+				dbConnection.close();
+		} catch (SQLException ex) {
+			Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 }
