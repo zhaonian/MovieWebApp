@@ -1,8 +1,4 @@
-Connection pooling for the scaled version of fabflix:
-  1. I have all the statements as PreparedStatement
-  2. I changed the instance 1 apache load balancer to the master and slave's private addresses
-  
-
-instance 1: ec2-52-27-63-14.us-west-2.compute.amazonaws.com:80/fabflix
-master: ec2-35-164-108-114.us-west-2.compute.amazonaws.com
-slave: ec2-52-41-85-129.us-west-2.compute.amazonaws.com
+AWS
+Tomcat
+MySQL
+...
